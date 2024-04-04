@@ -14,7 +14,7 @@
         <input type="password" name="contrasena" placeholder="Digite una contraseña">
         <input type="password" name="conf_contrasena" placeholder="Repita la contraseña">
 
-        <input type="submit" name="registrar" value="Registrarse">
+        <input type="submit" name="validar" value="Registrarse">
     </div>
 </body>
 </html>

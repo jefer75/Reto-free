@@ -8,7 +8,7 @@
 <body>
     <div class="container">
         <h2>Registrarse</h2>
-
+ 
         <input type="varchar" name="username" placeholder="Digite su nombre de usuario">
         <input type="int" name="edad" placeholder="Digite su edad">
         <input type="password" name="contrasena" placeholder="Digite una contraseña">

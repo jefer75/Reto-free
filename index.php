@@ -8,8 +8,8 @@
 <body>
     
     <div class="container"> 
-        <a href="">Registrarse</a>
-        <a href="">Iniciar Sesion</a>
+        <a href="registrarse.php">Registrarse</a>
+        <a href="login.php">Iniciar Sesion</a>
     </div>
 
 </body>

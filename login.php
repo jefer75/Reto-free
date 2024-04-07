@@ -6,6 +6,25 @@
     <title>Login</title>
 </head>
 <body>
+<header>
+        <form action="" method="POST">
+        
+        <td>
+        
+            <input type="submit" value="Regresar" name="regresar" id="regresar"> 
+        </td>
+        
+        </tr>
+        </form>
+        <?php 
+        
+        if(isset($_POST['regresar']))
+        {        
+            header('location:index.php');
+        }
+        
+        ?>
+    </header>
     <main>
         <div class="container">
             <h2>Inicio de sesion</h2>
@@ -15,7 +34,7 @@
 
             <input type="submit" name="validar" value="Ingresar">
 
-            <a href="">Olvide contraseña</a>
+            <a href="olv_contra.php">Olvide contraseña</a>
         </div>
     </main>
 </body>

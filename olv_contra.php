@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css">
-    <title>Login</title>
+    <title>Recuperar Contraseña</title>
 </head>
 <body>
-<header>
+    <header>
         <form action="" method="POST">
         
         <td>
@@ -21,22 +20,22 @@
         
         if(isset($_POST['regresar']))
         {        
-            header('location:index.php');
+            header('location:login.php');
         }
         
         ?>
     </header>
-    <main>
-        <div class="container">
-            <h2>Inicio de sesion</h2>
+    
+    <div>
+        <form action="">
+            <h2>Recuperar Contraseña</h2>
 
-            <input type="varchar" name="username" placeholder="Nombre de usuario">
-            <input type="password" name="contrasena" placeholder="Contraseña">
+            <input type="email" name="email" placeholder="Digite su correo electronico">
+            <input type="submit" name="validar" value="Recuperar">
 
-            <input type="submit" name="validar">
+            <a href="login.php">Iniciar Sesion</a>
+        </form>
+    </div>
 
-            <a href="olv_contra.php">Olvide contraseña</a>
-        </div>
-    </main>
 </body>
 </html>

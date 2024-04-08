@@ -28,12 +28,12 @@
     </header>
     <main>
         <div class="container">
-            <h2>Inicio de sesion</h2>
+            <h2>Error al inicio de sesion</h2>
 
             <input type="varchar" name="username" placeholder="Nombre de usuario">
             <input type="password" name="contrasena" placeholder="Contraseña">
 
-            <input type="submit" name="validar">
+            <button type="submit" name="inicio" value="validar" class="ingresar">Ingresar</button>
 
             <a href="olv_contra.php">Olvide contraseña</a>
         </div>

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    require_once ("db/connection.php");
+    //include("../../../controller/validar_licencia.php");
+    $db = new DataBase();
+    $con = $db -> conectar();
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+
 <body>
 <header>
-        <form action="" method="POST">
+        <form method="POST" action="">
         
         <td>
         
@@ -27,14 +37,16 @@
     </header>
     <main>
         <div class="container">
-            <h2>Inicio de sesion</h2>
+            <form method="POST" name="form1" id="form1" action="controller/inicio.php" autocomplete="off" class="registration">
+                <h2>Inicio de sesion</h2>
 
-            <input type="varchar" name="username" placeholder="Nombre de usuario">
-            <input type="password" name="contrasena" placeholder="Contraseña">
+                <input type="varchar" name="username" placeholder="Nombre de usuario">
+                <input type="password" name="contrasena" placeholder="Contraseña">
 
-            <input type="submit" name="validar" value="Ingresar">
+                <button type="submit" name="inicio" value="validar" class="ingresar">Ingresar</button>
 
-            <a href="olv_contra.php">Olvide contraseña</a>
+                <a href="olv_contra.php">Olvide contraseña</a>
+                </form>
         </div>
     </main>
 </body>

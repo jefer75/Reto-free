@@ -7,6 +7,8 @@ session_start();
 if (isset($_POST["inicio"])) {
 
     $username = $_POST["username"];
+    
+    
     //$contrasena = $_POST("contrasena");
     $contrasena = htmlentities(addslashes($_POST['contrasena']));
 

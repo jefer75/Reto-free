@@ -32,7 +32,7 @@
 
      else
    
-     if ($username=="" || $edad=="" || $avatar=="" || $correo=="" || $contrasena=="")
+     if ($username=="" || $edad=="" || $id_avatar=="" || $correo=="" || $contrasena=="")
       {
          echo '<script>alert ("Por favor llene todos los campos");</script>';
          echo '<script>window.location="registrarse.php"</script>';

@@ -1,50 +1,93 @@
+<?php
+    session_start();
+    require_once("../../db/connection.php");
+    // include("../../../controller/validarSesion.php");
+    $db = new Database();
+    $con = $db -> conectar();
+
+    $username= $_SESSION['username'];
+
+
+    $query1 = $con -> prepare("SELECT * FROM jugadores WHERE username = '$username'");
+    $query1 -> execute ();
+    $reg_vida = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($reg_vida as $fila){
+        $vida=$fila['vida'];
+        $arma=$fila['id_arma'];   
+    }
+
+    if ($vida >= 0){
+        $estado = 3;
+    }
+    else if($vida <= 0){
+        $estado = 4;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juega Free</title>
+    <title>Juega</title>
 </head>
 <body>
 
     <div class="container">
 
-    <form method="post" name="formreg" id="formreg" class="signup-form"  autocomplete="off"> 
-            <label for="mapa"></label>
-            <select name="mapa">
-                    <option value ="">Seleccione el mapa</option>
+        <div class="tabla">
+            <table>
+                <tr>
+                    <th>Nombre del jugador</th>
+                    <th>vida</th>
+                    <th>Arma</th>
+                    <th>Accion</th>
+                </tr>
+                
+                <?php
+
                     
-                    <?php
-                        $control = $con -> prepare ("SELECT * from mundos");
-                        $control -> execute();
-                    while ($fila = $control->fetch(PDO::FETCH_ASSOC)) 
-                    {
-                        echo "<option value=" . $fila['id_mundo'] . ">"
-                        . $fila['mundo'] . "</option>";
-                    } 
-                    ?>
-            </select>
 
-            <label for="arma"></label>
-            <select name="arma">
-                    <option value ="">Seleccione el arma</option>
+
+                    $query1 = $con -> prepare("SELECT * FROM jugadores");
+                    $query1 -> execute ();
+                    $jugadores = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach ($jugadores as $fila){
+                    $id_arma = $fila ['id_arma'];
                     
+                ?>
+
+                <tr>
+                    <td><?php echo $fila['username']?></td>
+                    <td><?php echo $fila['vida']?></td>
+
                     <?php
-                        $control = $con -> prepare ("SELECT * from arma");
-                        $control -> execute();
-                    while ($fila = $control->fetch(PDO::FETCH_ASSOC)) 
-                    {
-                        echo "<option value=" . $fila['id_arma'] . ">"
-                        . $fila['arma'] . "</option>";
-                    } 
-                    ?>
-            </select>
+                    $mostrar_arma = $con -> prepare("SELECT * FROM armas WHERE id_arma = $id_arma");
+                    $mostrar_arma -> execute ();
+                    $armas = $mostrar_arma -> fetchAll(PDO::FETCH_ASSOC);
 
-            <input type="submit" name="validar" value="Registro">
-            <input type="hidden" name="MM_insert" value="formreg">
-        </form>
+                    foreach ($armas as $fila){
+                        $arma = $fila ['nomb_arma'];
+                    }
+                        
+                ?>
+                    <td><?php echo $arma?></td>
+                    <td><input type="submit" name="atacar" id="atacar" value="atacar">
 
+                    </td>
+                </tr>
+                <?php
+                    
+                }
+                ?>
+
+        </table>
     </div>
+
+</div>
     
 </body>
 </html>

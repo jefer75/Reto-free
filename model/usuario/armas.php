@@ -15,36 +15,35 @@
 
                 $puntos=$fila['puntos'];
                 $nivel=$fila['nivel'];
-
             }
-    if ($nivel <= 5){
-
-        $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 2");
-        $query1 -> execute ();
-        $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-
-    }
-    else if ($nivel >= 5 AND $nivel <= 10){
-        $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 4");
-        $query1 -> execute ();
-        $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-    }
-    else if ($nivel >= 10 AND $nivel <= 15){
-        $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 6");
-        $query1 -> execute ();
-        $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-    }
-    else if ($nivel >= 15 AND $nivel <= 20){
-        $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 8");
-        $query1 -> execute ();
-        $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-    }
-    else if ($nivel >= 20 AND $nivel <= 25){
-        $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 10");
-        $query1 -> execute ();
-        $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-    }
     
+            if ($nivel <= 5){
+
+                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 2");
+                $query1 -> execute ();
+                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+        
+            }
+            else if ($nivel >= 5 AND $nivel <= 10){
+                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 4");
+                $query1 -> execute ();
+                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+            }
+            else if ($nivel >= 10 AND $nivel <= 15){
+                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 6");
+                $query1 -> execute ();
+                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+            }
+            else if ($nivel >= 15 AND $nivel <= 20){
+                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 8");
+                $query1 -> execute ();
+                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+            }
+            else if ($nivel >= 20 AND $nivel <= 25){
+                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 10");
+                $query1 -> execute ();
+                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+            }
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +55,26 @@
 </head>
 <body>
 
+<header>
+        <form action="" method="POST">
+        
+        <td>
+        
+            <input type="submit" value="Regresar" name="regresar" id="regresar"> 
+        </td>
+        
+        </tr>
+        </form>
+        <?php 
+        
+        if(isset($_POST['regresar']))
+        {        
+            header('location:index.php');
+        }
+        
+        ?>
+    </header>
+
     <div class="container">
 
         <div class="tabla">
@@ -63,7 +82,7 @@
                 <tr>
                     <th>Nombre de arma</th>
                     <th>Daño</th>
-                    <th>Arma</th>   
+                    <th>Arma</th>
                 </tr>
                 
                 <?php

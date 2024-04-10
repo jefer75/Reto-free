@@ -18,6 +18,26 @@
     <link rel="stylesheet" href="../../css/index_usu.css">
 </head>
 <body>
+<header>
+        <form action="" method="POST">
+        
+        <td>
+        
+            
+            <input type="submit" value="Cerrar Sesion" name="cerrar_sesion" id="cerrar_sesion"> 
+        </td>
+        
+        </tr>
+        </form>
+        <?php 
+        if (isset($_POST['cerrar_sesion']))
+        {
+            session_destroy();
+            header('location:../../index.html');
+        }
+        
+        ?>
+    </header>
     <div class="container">
         <?php
 
@@ -59,8 +79,8 @@
         <div class="menu">
             <a href="reportes.php" class="btn">Resultados</a>
             <a href="armas.php" class="btn">Armas</a>
-            <a href="mapas.php" class="btn">Jugar</a>
-            <a href="juego.php" class="btn_jugar">Jugar</a>
+            <a href="mapas.php" class="btn">mapas</a>
+            <a href="select_arma.php" class="btn_jugar">Jugar</a>
         </div>
 
 

@@ -50,6 +50,7 @@
             $id_avatar=$fila['id_avatar'];
             $username=$fila['username'];
             $nivel=$fila['nivel'];
+            $puntos=$fila['puntos'];
             $id_rango=$fila['id_rango'];
 
                 $query1 = $con -> prepare("SELECT * FROM avatares where id_avatar =$id_avatar");
@@ -73,6 +74,7 @@
             <p><?php echo $avatar; ?></p>
             <h4><?php echo $username; ?></h4>
             <p><?php echo $nivel; ?></p>
+            <p><?php echo $puntos; ?></p>
             <p><?php echo $rango; ?></p>
         </div>
 

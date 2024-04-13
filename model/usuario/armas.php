@@ -7,43 +7,31 @@
 
     $username= $_SESSION['username'];
 
-            $query = $con -> prepare("SELECT * FROM usuarios Where username='$username'");
-            $query -> execute ();
-            $resultados = $query -> fetchAll(PDO::FETCH_ASSOC);
+    $query = $con -> prepare("SELECT * FROM usuarios Where username='$username'");
+    $query -> execute ();
+    $resultados = $query -> fetchAll(PDO::FETCH_ASSOC);
+    foreach ($resultados as $fila){
+        $nivel=$fila['nivel'];
+    }
 
-            foreach ($resultados as $fila){
-
-                $puntos=$fila['puntos'];
-                $nivel=$fila['nivel'];
-            }
-    
-            if ($nivel <= 5){
-
-                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 2");
-                $query1 -> execute ();
-                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-        
-            }
-            else if ($nivel >= 5 AND $nivel <= 10){
-                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 4");
-                $query1 -> execute ();
-                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-            }
-            else if ($nivel >= 10 AND $nivel <= 15){
-                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 6");
-                $query1 -> execute ();
-                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-            }
-            else if ($nivel >= 15 AND $nivel <= 20){
-                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 8");
-                $query1 -> execute ();
-                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-            }
-            else if ($nivel >= 20 AND $nivel <= 25){
-                $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= 10");
-                $query1 -> execute ();
-                $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-            }
+    if ($nivel <= 4){
+        $id_arma=2;
+    }
+    else if ($nivel >= 5 AND $nivel <= 9){
+        $id_arma=4;
+    }
+    else if ($nivel >= 10 AND $nivel <= 14){
+        $id_arma=6;
+    }
+    else if ($nivel >= 15 AND $nivel <= 19){
+        $id_arma=8;
+    }
+    else if ($nivel >= 20 AND $nivel  <= 24){
+        $id_arma=10;
+    }
+    else if ($nivel >= 25){
+        $id_arma=12;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -81,17 +69,21 @@
             <table>
                 <tr>
                     <th>Nombre de arma</th>
+                    <th>Cantidad de balas</th>
                     <th>Daño</th>
                     <th>Arma</th>
                 </tr>
                 
                 <?php
-
-                  foreach ($arma as $fila){
+                    $query1 = $con -> prepare("SELECT * FROM armas where id_arma <= $id_arma");
+                    $query1 -> execute ();
+                    $arma = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($arma as $fila){
                 ?>
 
                 <tr>
                     <td><?php echo $fila['nomb_arma']?></td>
+                    <td><?php echo $fila['cant_balas']?></td>
                     <td><?php echo $fila['daño']?></td>
                     <td><?php echo $fila['arma']?></td>
                 </tr>

@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../img/free1.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    margin-top: 85vh; 
+    margin-bottom: 50px; 
+}
+
+.buttons {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(245, 190, 11);
+    color: black;
+    text-decoration: none;
+    margin: 0 30px; 
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    .container {
+        margin-bottom: 20px; 
+    }
+}

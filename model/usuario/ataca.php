@@ -7,23 +7,6 @@
 
     $username= $_SESSION['username'];
 
-    $con_arma = $con -> prepare("SELECT * FROM jugadores WHERE username ='$username'");
-    $con_arma -> execute ();
-    $arma = $con_arma -> fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($arma as $fila){
-        $id_arma = $fila ['id_arma'];
-
-        $con_daño = $con -> prepare("SELECT * FROM armas WHERE id_arma =$id_arma");
-        $con_daño -> execute ();
-        $daños = $con_daño -> fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($daños as $fila){
-            $daño = $fila ['daño'];
-        }
-    }
-
-
     $mostrar_arma = $con -> prepare("SELECT * FROM jugadores WHERE username ='".$_GET['id']."'");
     $mostrar_arma -> execute ();
     $armas = $mostrar_arma -> fetchAll(PDO::FETCH_ASSOC);
@@ -35,6 +18,22 @@
     }
 
     if (isset($_POST['actualizar'])){
+
+        $con_arma = $con -> prepare("SELECT * FROM jugadores WHERE username ='$username'");
+        $con_arma -> execute ();
+        $arma = $con_arma -> fetchAll(PDO::FETCH_ASSOC);
+    
+        foreach ($arma as $fila){
+            $id_arma = $fila ['id_arma'];
+    
+            $con_daño = $con -> prepare("SELECT * FROM armas WHERE id_arma =$id_arma");
+            $con_daño -> execute ();
+            $daños = $con_daño -> fetchAll(PDO::FETCH_ASSOC);
+            
+            foreach ($daños as $fila){
+                $daño = $fila ['daño'];
+            }
+        }
 
         $actualizado= $vida - $daño;
 

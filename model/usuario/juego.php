@@ -7,35 +7,74 @@
 
     $username= $_SESSION['username'];
 
+    
+    
+
     if (isset($_POST['abandonar'])){
         
-        $con_puntos = $con -> prepare("SELECT * FROM jugadores WHERE username = '$username'");
-        $con_puntos -> execute ();
-        $puntos = $con_puntos -> fetchAll(PDO::FETCH_ASSOC);
+        //consulta el jugador en la tabla jugadores
+    $con_puntos = $con -> prepare("SELECT * FROM jugadores WHERE username = '$username'");
+    $con_puntos -> execute ();
+    $datos = $con_puntos -> fetchAll(PDO::FETCH_ASSOC);
+    
+    //declara las variables
 
-        foreach ($puntos as $fila){
-        $puntos = $fila ['puntos'];
-        }
-
+        foreach ($datos as $fila){
+            $puntos = $fila ['puntos'];
+            $id_sala = $fila ['id_sala'];
+            }
+        //condicional para la resta de puntos del jugador
         if ($puntos >= 20){
             $actualizado = $puntos - 20;
-                    
-            $resta_puntos= $con -> prepare ("UPDATE usuarios SET puntos=$actualizado WHERE username = '$username'");
-            $resta_puntos -> execute();
         }
         else if ($puntos >= 0 AND $puntos < 20) {
             $actualizado = $puntos - $puntos;
-                    
-            $resta_puntos= $con -> prepare ("UPDATE usuarios SET puntos=$actualizado WHERE username = '$username'");
-            $resta_puntos -> execute();
-
         }
         
+        //actualiza la cantidad de puntos del jugador en su perfil
+        $resta_puntos= $con -> prepare ("UPDATE usuarios SET puntos=$actualizado WHERE username = '$username'");
+        $resta_puntos -> execute();
+
+        //consulta la sala en la que se encuentra el jugador
+        $fila = $con->prepare("SELECT * FROM `salas` WHERE id_sala = $id_sala");
+        $fila->execute();
+        $numero_jugadores = $fila->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($numero_jugadores as $fila) {
+            
+                //declara las variables del registro que encontro
+                $id_sala = $fila['id_sala'];
+                $num_jug = $fila['num_jug'];
+    
+            }
+
+            $num_jug = $num_jug - 1;
+
+            //actualiza el numero de jugadores en la sala seleccionada de la tabla salas
+            $actualizar_num_jug = $con->prepare("UPDATE salas SET num_jug=$num_jug WHERE id_sala = $id_sala");
+            $actualizar_num_jug->execute();
+        
+            //redirecciona al index del usuario
+            header('location:index.php');
+        
+
         $abandonar= $con -> prepare ("DELETE FROM jugadores WHERE username = '$username'");
         $abandonar -> execute();
-        
-        header('location:index.php');
     }
+
+    $con_puntos = $con -> prepare("SELECT * FROM jugadores WHERE username = '$username'");
+    $con_puntos -> execute ();
+    $datos = $con_puntos -> fetchAll(PDO::FETCH_ASSOC);
+    foreach ($datos as $fila) {
+            
+        //declara las variables del registro que encontro
+        $id_sala = $fila['id_sala'];
+    }
+
+    $query1 = $con -> prepare("SELECT * FROM jugadores WHERE username != '$username' AND id_sala = $id_sala");
+    $query1 -> execute ();
+    $jugadores = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -67,10 +106,7 @@
                 
                 <?php
 
-                    $query1 = $con -> prepare("SELECT * FROM jugadores WHERE username != '$username'");
-                    $query1 -> execute ();
-                    $jugadores = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-
+                    
                     foreach ($jugadores as $fila){
                         
                     $username=$fila['username'];

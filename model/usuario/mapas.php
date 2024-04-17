@@ -18,35 +18,23 @@
 
             }
     
-            if ($nivel <= 5){
-
-                $query1 = $con -> prepare("SELECT * FROM mundos where id_mundo = 1");
-                $query1 -> execute ();
-                $mundo = $query1 -> fetchAll(PDO::FETCH_ASSOC);
-        
+            if ($nivel < 5){
+                $id_mundo=1;        
             }
-            else if ($nivel >= 5 AND $nivel < 10){
-                $query1 = $con -> prepare("SELECT * FROM mundos where id_mundo <= 2");
-                $query1 -> execute ();
-                $mundo = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+            else if ($nivel >= 5 AND $nivel <= 9){
+                $id_mundo=2;                
             }
-            else if ($nivel >= 10 AND $nivel < 15){
-                $query1 = $con -> prepare("SELECT * FROM mundos where id_mundo <= 3");
-                $query1 -> execute ();
-                $mundo = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+            else if ($nivel >= 10 AND $nivel <= 14){
+                $id_mundo=3;               
             }
-            else if ($nivel >= 15 AND $nivel < 20){
-                $query1 = $con -> prepare("SELECT * FROM mundos where id_mundo <= 4");
-                $query1 -> execute ();
-                $mundo = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+            else if ($nivel >= 15 AND $nivel <= 19){
+                $id_mundo=4;               
             }
             else if ($nivel >= 20){
-                $query1 = $con -> prepare("SELECT * FROM mundos where id_mundo <= 5");
-                $query1 -> execute ();
-                $mundo = $query1 -> fetchAll(PDO::FETCH_ASSOC);
+                $id_mundo=5;                
             }
 
-
+            
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +42,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="">
     <title>Mapas</title>
 </head>
 <body>
@@ -83,18 +71,35 @@
 
     <h1 class="title">Mapas</h1>
         <table>
-            <tr> 
-                <td>Nombre del mapa</td>
-                <td>Mapa</td>
-            </tr>
+            <thead> 
+                <th>Nombre del mapa</th>
+                <th>Mapa</th>
+            </thead>
             
             <?php
 
-                  foreach ($mundo as $fila){
+                $query1 = $con->prepare("SELECT * FROM mundos");
+                $query1->execute();
+                $arma = $query1->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($arma as $fila) {
+                $nombre = $fila['nomb_mundo'];
+                $mundo = $fila['mundo'];
+                $id_estado = $fila['id_estado'];
+
+                $act_disponible = $con->prepare("UPDATE mundos SET id_estado='5' WHERE id_mundo <= $id_mundo");
+                $act_disponible->execute();
+
+                $con_estado = $con->prepare("SELECT * FROM estados where id_estado <= $id_estado");
+                $con_estado->execute();
+                $estados = $con_estado->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($estados as $fila) {
+                    $estado= $fila['estado'];
+                }
             ?>
             <tr>
-                <td><?php echo $fila['nomb_mundo']?></td>
-                <td><?php echo $fila['mundo']?></td>              
+                <td><?php echo $nombre?></td>
+                <td><?php echo $mundo?></td>
+                <td><?php echo $estado?></td>
             </tr>
             <?php
                   }

@@ -6,7 +6,6 @@
     $con = $db -> conectar();
 
     $username= $_SESSION['username'];
-
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +17,28 @@
     <link rel="stylesheet" href="../../css/index_usu.css">
 </head>
 <body>
-<header>
-        <form action="" method="POST">
+
+        <?php 
+        if (isset($_POST['cerrar_sesion']))
+        {
+            session_destroy();
+            header('location:../../index.html');
+        }
+        
+        ?>
+
+    <div class="menu-container">
+        <div class="menu">
+            <a href="reportes.php" class="btn">Resultados</a>
+            <a href="armas.php" class="btn">Armas</a>
+            <a href="mapas.php" class="btn">mapas</a>
+            <a href="select_arma.php" class="btn_jugar">Jugar</a>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="sidebar">
+    <form action="" method="POST">
         
         <td>
         
@@ -29,16 +48,8 @@
         
         </tr>
         </form>
-        <?php 
-        if (isset($_POST['cerrar_sesion']))
-        {
-            session_destroy();
-            header('location:../../index.html');
-        }
         
-        ?>
-    </header>
-    <div class="container">
+        
         <?php
 
             $query = $con -> prepare("SELECT * FROM usuarios Where username='$username'");
@@ -70,25 +81,15 @@
                 }
             }
         ?>
-        <div class="perfil">
-        <p><?php echo $avatar; ?></p>
-        <h4><?php echo $username; ?></h4>
-        <p><?php echo $nivel; ?></p>
-        <p><?php echo $puntos; ?></p>
-        <p><?php echo $rango; ?></p>
-    </div>
-    </div>
-
-    <div class="menu-container">
-        
-        <div class="menu">
-            <a href="reportes.php" class="btn">Resultados</a>
-            <a href="armas.php" class="btn">Armas</a>
-            <a href="mapas.php" class="btn">mapas</a>
-            <a href="select_arma.php" class="btn_jugar">Jugar</a>
+            <img src="<?php echo $avatar;?>" alt="">
+            <div class="texto">
+            <h4><?php echo $username; ?></h4>
+            <p><?php echo $nivel; ?></p>
+            <p><?php echo $puntos; ?></p>
+            <p><?php echo $rango; ?></p>
+            </div>
         </div>
     </div>
-
 
         <div class="carrusel">
             <div class="image-box">

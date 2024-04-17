@@ -12,7 +12,9 @@ body
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url(https://dl.dir.freefiremobile.com/common/web_event/official2.ff.garena.all/20241/d6da980c66a6d3e7c8aae4d4a643bc09.jpg); 
+    background-image: url("../img/free1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 .regresar{
     position: absolute;

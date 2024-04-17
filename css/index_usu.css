@@ -1,33 +1,8 @@
-.container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin-left: 200px; /* Ancho de la barra lateral + margen */
-  padding: 20px;
-  background-image: url('../img/free1.jpg');
-  background-size: cover;
-  background-position: center;
+body {
+  background-image: url("../img/index_usu.jpg");
   background-repeat: no-repeat;
-  z-index: -1; /* Para que esté detrás del contenido */
-}
-
-
-#cerrar_sesion {
-  position: fixed;
-  top: 110px; /* Ajusta la distancia desde la parte superior según sea necesario */
-  left: 50px;  /* Ajusta la distancia desde la derecha según sea necesario */
-  z-index: 1100; /* Un valor mayor que el z-index de la barra lateral */
-  border-radius: 90px;
-  background: rgb(245, 190, 11);
-  padding: 8px;
-  font-size: 20px;
-  transition: box-shadow 0.5s; /* Agrega una transición suave al cambio de sombra */
-}
-
-#cerrar_sesion:hover {
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Cambia la sombra cuando se pasa el cursor sobre el botón */
+  background-size: 100%;
+  margin: 0;
 }
 
 .menu-container {
@@ -42,7 +17,6 @@
   flex-direction: column;
   align-items: center;
 }
-
 .menu {
   display: block;
   justify-content: center;
@@ -61,7 +35,7 @@
 }
 
 .menu a:hover {
-  background-color: #efb907; /* Cambia el color de fondo al pasar el cursor */
+  background-color: whit; /* Cambia el color de fondo al pasar el cursor */
   background-color: rgba(66, 64, 64, 0.437); /* Cambia el color de fondo al pasar el cursor */
   transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el cursor */
 }
@@ -77,40 +51,62 @@
   margin-top: 10px;
 }
 
+.container {
+  display: block;
+  width: 20%;
+  margin-top: 2%;
+  opacity: .8;
+  border-radius: 2em;
+}
+
 .sidebar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 184px;
+  height: 25em;
+  width: 50%;
   background-color: #080808;
-  color: white;
+  color:White;
+  font-size: 200%;
   padding: 100px;
 }
 
-.perfil {
-  margin-bottom: 20px;
-  margin-top: 200px;
+#cerrar_sesion {
+  border-radius: 2em;
+  background: rgb(245, 190, 11);
+  padding: 8px;
+  font-size: 20px;
+  transition: box-shadow 0.5s; /* Agrega una transición suave al cambio de sombra */
 }
 
-.perfil p, .perfil h4 {
-  margin: 0;
-  padding: 0;
-  margin-bottom: 50px;
+#cerrar_sesion:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Cambia la sombra cuando se pasa el cursor sobre el botón */
+  background-color: white;
 }
 
+h4{
+  margin-top: 70%;
+  padding: 5%;
+}
+.sidebar p{
+  padding: 10%;
+}
+h4:hover, .sidebar p:hover {
+  border: solid 1px white;
+  padding: 10%;
+  border-radius: 4px;
 
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Cambia la sombra cuando se pasa el cursor sobre el botón */
+}
 
   /* Estilos para el carrusel */
   .carrusel {
+    opacity: .9;
     position: fixed;
-    right: 17%;
+    right: 15%;
     top: 55%;
     transform: translateY(-50%) scale(1); /* Escala inicial */
     transition: transform 0.3s; /* Transición suave */
-    max-width: 800px;
-    width: 90%;
-    height: 25em;
+    max-width: 70em;
+    width: 60em;
+    height: 40em;
     border: 30px solid #080808;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
     overflow: hidden;

@@ -136,12 +136,18 @@
                     <td id="campo_vida"><?php echo $vida?></td>
                     <td><?php echo $arma?></td>
                     <td id="campo_estado"><?php echo $estado?></td>
+                    <?php 
+                    
+                    if($estado=3){
+                        echo "
+                        ?>
                     <td>
-                        <a class="hiper" href="" onclick="window.open
-                        ('ataca.php?id=<?php echo $username ?>','','width=475, height=215, toolbar=NO'); void(null);">Atacar</a>
+                        <a class="hiper" href="' onclick="window.open
+                        ('<script>ataca.php?id=<?php echo $username ?>','','width=475, height=250, toolbar=NO</script>'); void(null);">Atacar</a>
                         </td>
                     </tr>
-                <?php
+                "
+                    }
                 }
                 ?>
 

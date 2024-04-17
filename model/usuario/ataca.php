@@ -14,10 +14,13 @@
     foreach ($armas as $fila){
         $user_atacado = $fila ['username'];
         $vida = $fila ['vida'];
-
+        $estado= $fila ['id_estado'];
     }
+    echo $estado;
 
-    if (isset($_POST['actualizar'])){
+    if (isset($_POST['atacar'])){
+
+        
 
         $con_arma = $con -> prepare("SELECT * FROM jugadores WHERE username ='$username'");
         $con_arma -> execute ();
@@ -37,17 +40,23 @@
 
         $actualizado= $vida - $daño;
 
-        $actualizar= $con -> prepare ("UPDATE jugadores SET vida='$actualizado' WHERE username = '$user_atacado'");
-        $actualizar -> execute();
+        if($actualizado <= 0){
 
+            $actualizado = 0;
+            $estado = 4;
+        }
+
+        $actualizar= $con -> prepare ("UPDATE jugadores SET vida='$actualizado', id_estado='$estado' WHERE username = '$user_atacado'");
+        $actualizar -> execute();
+        
         echo '<script> alert ("Ataque realizado con exito");</script>';
         echo '<script> window.close(); </script>';   
+
     }
-    if (isset($_POST['cancelar'])){
+    else if (isset($_POST['cancelar'])){
     
         echo '<script> alert ("Ataque cancelado");</script>';
         echo '<script> window.close(); </script>';   
-        echo $actualizado;
     }  
     
     
@@ -77,7 +86,7 @@
             <h3>Estas seguro?</h3>
 
             <input type="submit" name="cancelar" value="Cancelar">
-            <input type="submit" name="actualizar" value="Atacar">
+            <input type="submit" name="atacar" value="Atacar">
         </form>
 
     </div>

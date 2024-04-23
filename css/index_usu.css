@@ -101,17 +101,17 @@ h4:hover, .sidebar p:hover {
   .carrusel {
     opacity: .9;
     position: fixed;
-    right: 15%;
+    right: 5%;
     top: 55%;
-    transform: translateY(-50%) scale(1); /* Escala inicial */
-    transition: transform 0.3s; /* Transición suave */
+    transform: translateY(-50%) scale(1);
+    transition: transform 0.3s;
     max-width: 70em;
-    width: 60em;
-    height: 40em;
+    width: 45em;
+    height: 30em;
     border: 30px solid #080808;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
     overflow: hidden;
-    background-color: #080808; /* Color de fondo */
+    background-color: #080808;
     animation: increaseScale 1s infinite alternate; /* Animación constante */
   }
   

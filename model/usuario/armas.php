@@ -69,7 +69,7 @@ if (isset($_POST['regresar'])) {
                     <th>Tipo de arma</th>
                     <th>Cantidad de balas</th>
                     <th>Daño</th>
-                    <th>Arma</th>
+                    <th>Imagen</th>
                     <th>Estado</th>
                 </tr>
 
@@ -81,8 +81,8 @@ if (isset($_POST['regresar'])) {
                         $nombre = $fila['nomb_arma'];
                         $id_tipo_armas = $fila['id_tipo_arma'];
                         $cant_balas = $fila['cant_balas'];
-                        $daño = $fila['daño'];
-                        $arma = $fila['arma'];
+                        $daño = $fila['dano'];
+                        $imagen = $fila['imagen'];
                         $id_estado = $fila['id_estado'];
 
                         $act_disponible = $con->prepare("UPDATE `armas` SET id_estado='5' WHERE id_arma <= $tipo_arma");
@@ -108,7 +108,7 @@ if (isset($_POST['regresar'])) {
                     <td><?php echo $tipo ?></td>
                     <td><?php echo $cant_balas ?></td>
                     <td><?php echo $daño ?></td>
-                    <td><?php echo $arma ?></td>
+                    <td><?php echo $imagen ?></td>
                     <td><?php echo $estado ?></td>
                 </tr>
                 <?php

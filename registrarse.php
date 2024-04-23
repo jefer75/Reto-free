@@ -18,7 +18,7 @@
     $contrasena= $_POST['contrasena'];
     $conf_contra= $_POST['conf_contra'];
     $f_ingreso= date('Y-m-d');
-    $id_estado= 1;
+    $id_estado= 2;
     $id_tipo_user= 2; 
 
      $sql= $con -> prepare ("SELECT * FROM usuarios WHERE username='$username'");

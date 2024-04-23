@@ -42,7 +42,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../../css/mapas.css">
     <title>Mapas</title>
 </head>
 <body>
@@ -74,6 +74,7 @@
             <thead> 
                 <th>Nombre del mapa</th>
                 <th>Mapa</th>
+                <th>Estado</th>
             </thead>
             
             <?php
@@ -99,7 +100,7 @@
             <tr>
                 <td><?php echo $nombre?></td>
                 <td><?php echo $mundo?></td>
-                <td><?php echo $estado?></td>
+                <td class="estado"><?php echo $id_estado?></td>
             </tr>
             <?php
                   }
@@ -108,6 +109,25 @@
         </table>
 
     </div>
+    <style>
 
+<?php
+    if ($id_estado==5){
+        
+    echo".estado {";
+    echo"background-color: #0d8d11;";
+    echo"color: white;";
+    echo"font-weight: bold;}";
+    }
+    else if($id_estado==6){
+        echo".estado {";
+        echo"background-color: red;";
+        echo"color: white;";
+        echo"font-weight: bold;}";
+    }
+?>
+
+
+</style>
 </body>
 </html>

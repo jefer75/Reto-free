@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <link rel="stylesheet" href="../../css/index_usu.css">
+</head>
+<body>
+
+
+    <div class="menu-container">
+        <div class="menu">
+            <a href="reportes.php" class="btn">Resultados</a>
+            <a href="armas.php" class="btn">Armas</a>
+            <a href="mapas.php" class="btn">mapas</a>
+            <a href="select_arma.php" class="btn_jugar">Jugar</a>
+        </div>
+    </div>
+
+    <div class="container">
+    <div class="sidebar">
+    <form action="" method="POST">
+        
+        <td>
+        
+            
+            <input type="submit" value="Cerrar Sesion" name="cerrar_sesion" id="cerrar_sesion"> 
+        </td>
+        
+        </tr>
+        </form>
+      
+        ?>
+            <img src="<?php echo $avatar;?>" alt="">
+            <div class="texto">
+            <h4><?php echo $username; ?></h4>
+            <p><?php echo $nivel; ?></p>
+            <p><?php echo $puntos; ?></p>
+            <p><?php echo $rango; ?></p>
+            </div>
+        </div>
+    </div>
+
+        <div class="carrusel">
+            <div class="image-box">
+            <div class="image">
+                <img class="img1" src="../../img/mapas/bermuda.jpg" alt="">
+            </div>
+            <div class="image">
+                <img class="img2" src="../../img/mapas/alpes.jpg" alt="">
+            </div>
+            <div class="image">
+                <img class="img3" src="../../img/mapas/purgatorio.jpg" alt="">
+            </div>
+            <div class="image">
+                <img class="img4" src="../../img/mapas/kalahari.jpg" alt="">
+            </div>
+            <div class="image">
+                <img class="img4" src="../../img/mapas/nexterra.png" alt="">
+            </div>
+            </div>
+        </div>
+
+        </div>
+
+        <script>
+            
+            document.getElementById('menu-btn').addEventListener('click', function() {
+            var menu = document.querySelector('.menu');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+            menu.style.display = 'block';
+            } else {
+            menu.style.display = 'none';
+            }
+        });
+    
+    
+        </script>
+</body>
+</html>

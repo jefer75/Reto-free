@@ -100,7 +100,18 @@
             <tr>
                 <td><?php echo $nombre?></td>
                 <td><?php echo $mundo?></td>
-                <td class="estado"><?php echo $id_estado?></td>
+                <td 
+                <?php
+                    if ($id_estado==5){
+                        
+                    echo"class='estado_'";
+                    
+                    }
+                    else if($id_estado==6){
+                        echo"class='estado_red'";
+                    }
+                ?>
+                ><?php echo $estado?></td>
             </tr>
             <?php
                   }
@@ -109,25 +120,5 @@
         </table>
 
     </div>
-    <style>
-
-<?php
-    if ($id_estado==5){
-        
-    echo".estado {";
-    echo"background-color: #0d8d11;";
-    echo"color: white;";
-    echo"font-weight: bold;}";
-    }
-    else if($id_estado==6){
-        echo".estado {";
-        echo"background-color: red;";
-        echo"color: white;";
-        echo"font-weight: bold;}";
-    }
-?>
-
-
-</style>
 </body>
 </html>

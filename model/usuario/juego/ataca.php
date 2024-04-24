@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../db/connection.php");
+    require_once("../../../db/connection.php");
     // include("../../../controller/validarSesion.php");
     $db = new Database();
     $con = $db -> conectar();
@@ -20,9 +20,7 @@
         $user_atacado = $fila ['username'];
         $vida = $fila ['vida'];
         $estado= $fila ['id_estado'];
-    }
-
-    
+    }    
 
     $query = $con->prepare("SELECT * FROM usuarios Where username='$username'");
     $query->execute();
@@ -31,27 +29,26 @@
         $nivel = $fila['nivel'];
     }
 
+    
+    
     if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
 
     $id_arma = $_POST['id_arma'];
-    
     if ($id_arma=="")
       {
-         echo '<script>alert ("Selecciona tu arma");</script>';
-         echo '<script>window.location="ataca.php"</script>';
-      }
-      
-      else {
-
+          echo '<script>alert ("Selecciona tu arma");</script>';
+          echo '<script>window.location="ataca.php"</script>';
+        }
+        
+        else {
+            
             $con_daño = $con -> prepare("SELECT * FROM armas WHERE id_arma = $id_arma");
             $con_daño -> execute ();
             $daños = $con_daño -> fetchAll(PDO::FETCH_ASSOC);
             
             foreach ($daños as $fila){
-                $daño = $fila ['daño'];
+                $daño = $fila ['dano'];
             }
-
-            
 
             $actualizado= $vida - $daño;
 
@@ -130,7 +127,7 @@
                     $control->execute();
                     while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
                         echo "<option value=" . $fila['id_arma'] . ">"
-                            . $imagen . $espacio1 . $fila['nomb_arma'] . $espacio2 .$fila['daño'] . ")</option>";
+                            . $imagen . $espacio1 . $fila['nomb_arma'] .$daño. $espacio2 .$fila['daño'] . ")</option>";
                     }
                 ?>
 

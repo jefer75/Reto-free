@@ -9,7 +9,7 @@ body {
 
 .container {
     width: 80%;
-    margin: 250px auto; 
+    margin: 50px auto; 
     background-color: rgba(19, 18, 18, 0.945); 
     padding: 20px;
     border-radius: 10px;
@@ -73,6 +73,7 @@ th:last-child, td:last-child {
     font-weight: bold;
 }
 
-td:hover{
+td:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+

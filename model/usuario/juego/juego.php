@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../db/connection.php");
+    require_once("../../../db/connection.php");
     // include("../../../controller/validarSesion.php");
     $db = new Database();
     $con = $db -> conectar();

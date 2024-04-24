@@ -15,19 +15,19 @@ foreach ($resultados as $fila) {
 }
 
 if ($nivel <= 4) {
-    $tipo_arma = 3;
+    $rango_min = 1;
 } else if ($nivel >= 5 and $nivel <= 9) {
-    $tipo_arma = 6;
+    $rango_min = 2;
 } else if ($nivel >= 10 and $nivel <= 14) {
-    $tipo_arma = 9;
+    $rango_min = 3;
 } else if ($nivel >= 15 and $nivel <= 19) {
-    $tipo_arma = 12;
+    $rango_min = 4;
 } else if ($nivel >= 20 and $nivel <= 24) {
-    $tipo_arma = 15;
+    $rango_min = 5;
 } else if ($nivel >= 25 and $nivel <= 29) {
-    $tipo_arma = 18;
+    $rango_min = 6;
 }  else if ($nivel > 29) {
-    $tipo_arma = 21;
+    $rango_min = 7;
 }
 
 ?>
@@ -37,6 +37,7 @@ if ($nivel <= 4) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/armas.css">
     <title>Armas</title>
 </head>
 <body>
@@ -109,7 +110,18 @@ if (isset($_POST['regresar'])) {
                     <td><?php echo $cant_balas ?></td>
                     <td><?php echo $daño ?></td>
                     <td><?php echo $imagen ?></td>
-                    <td><?php echo $estado ?></td>
+                    <td
+                    <?php
+                        if ($id_estado==5){
+                            
+                        echo"class='estado_'";
+                        
+                        }
+                        else if($id_estado==6){
+                            echo"class='estado_red'";
+                        }
+                    ?>                    
+                    ><?php echo $estado ?></td>
                 </tr>
                 <?php
 }

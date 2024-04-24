@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../db/connection.php";
+require_once "../../../db/connection.php";
 // include("../../../controller/validarSesion.php");
 $db = new Database();
 $con = $db->conectar();
@@ -18,7 +18,7 @@ $con = $db->conectar();
 <?php
 
 if (isset($_POST['regresar'])) {
-    header('location:index.php');
+    header('location:../inicio/index.php');
 }
 ?>
 

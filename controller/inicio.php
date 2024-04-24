@@ -26,12 +26,12 @@ if (isset($_POST["inicio"])) {
                 case $_SESSION['id_estado'] = 1:
                     
                     if ($_SESSION['id_tipo_user'] == 1) {
-                        header ("Location: ../model/administrador/index.php");
+                        header ("Location: ../model/administrador/inicio/index.php");
                         exit();
                     }
                     
                     else if ($_SESSION['id_tipo_user'] == 2) {
-                        header ("Location: ../model/usuario/index.php");
+                        header ("Location: ../model/usuario/inicio/index.php");
                     exit();
                     }
 

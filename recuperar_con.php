@@ -1,11 +1,9 @@
 <?php
-    session_start();
-    require_once ("../../../db/connection.php");
-    //include("../../../controller/validar_licencia.php");
-    $db = new DataBase();
-    $con = $db -> conectar();
-
-
+ session_start();
+ require_once "db/connection.php";
+ // include("../../../controller/validarSesion.php");
+ $db = new Database();
+ $con = $db->conectar();
 
     if (isset($_POST['recuperar']))
     {

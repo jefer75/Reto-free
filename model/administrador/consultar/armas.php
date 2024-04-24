@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../db/connection.php";
+require_once "../../../db/connection.php";
 // include("../../../controller/validarSesion.php");
 $db = new Database();
 $con = $db->conectar();
@@ -11,6 +11,7 @@ $con = $db->conectar();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/armas.css">
     <title>Jugadores</title>
 </head>
 <body>
@@ -18,7 +19,7 @@ $con = $db->conectar();
 <?php
 
 if (isset($_POST['regresar'])) {
-    header('location:index.php');
+    header('location:../inicio/index.php');
 }
 ?>
 

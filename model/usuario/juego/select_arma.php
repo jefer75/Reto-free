@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../db/connection.php";
+require_once "../../../db/connection.php";
 // include("../../../controller/validarSesion.php");
 $db = new Database();
 $con = $db->conectar();
@@ -51,7 +51,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
         echo '<script>alert ("Seleccione uno de los mapas");</script>';
         echo '<script>window.location="select_arma.php"</script>';
 
-    } else {                
+    } else { 
                 
             //consulta si hay una sala que tenga  menos de 5 jugadores, con el mundo indicado
             $fila = $con->prepare("SELECT * FROM salas WHERE id_mundo = $id_mundo AND lvl_min <= $nivel AND lvl_max >= $nivel AND num_jug <=5");

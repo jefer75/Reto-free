@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../db/connection.php");
+    require_once("../../../db/connection.php");
     // include("../../../controller/validarSesion.php");
     $db = new Database();
     $con = $db -> conectar();
@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/mapas.css">
+    <link rel="stylesheet" href="../../../css/mapas.css">
     <title>Mapas</title>
 </head>
 <body>
@@ -45,7 +45,6 @@
             <thead> 
                 <th>Nombre del mapa</th>
                 <th>Mapa</th>
-                <th>Estado</th>
             </thead>
             
             <?php
@@ -54,12 +53,10 @@
                 $query1->execute();
                 $arma = $query1->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($arma as $fila) {
+                
                 $nombre = $fila['nomb_mundo'];
-                $mundo = $fila['mundo'];
+                $mundo = $fila['imagen'];
                 $id_estado = $fila['id_estado'];
-
-                $act_disponible = $con->prepare("UPDATE mundos SET id_estado='5' WHERE id_mundo <= $id_mundo");
-                $act_disponible->execute();
 
                 $con_estado = $con->prepare("SELECT * FROM estados where id_estado <= $id_estado");
                 $con_estado->execute();
@@ -70,7 +67,7 @@
             ?>
             <tr>
                 <td><?php echo $nombre?></td>
-                <td><?php echo $mundo?></td>
+                <td><img src="<?php echo $mundo;?>" width="100" height="100" alt=""></td>
                 <td 
                 <?php
                     if ($id_estado==5){
@@ -82,7 +79,6 @@
                         echo"class='estado_red'";
                     }
                 ?>
-                ><?php echo $estado?></td>
             </tr>
             <?php
                   }

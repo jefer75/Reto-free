@@ -108,7 +108,8 @@
                         while ($fila = $control->fetch(PDO::FETCH_ASSOC)) 
                         {
                             echo "<option value=" . $fila['id_avatar'] . ">"
-                            . $fila['avatar'] . "</option>";
+                            . $fila['nombre'] ."</option>";
+
                         } 
                         ?>
                 </select>

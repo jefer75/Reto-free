@@ -89,7 +89,7 @@
         }
 
     if ($vida== 0){
-        header('location:index.php');
+        header('location:../inicio/index.php');
         $abandonar -> execute();
     }
 ?>
@@ -114,6 +114,7 @@
         <div class="tabla">
             <table>
                 <tr>
+                    <th>Sala</th>
                     <th>Nombre del jugador</th>
                     <th>vida</th>
                     <th>Estado</th>
@@ -126,7 +127,7 @@
     $jugadores = $con_jugadores->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($jugadores as $fila){
-                        
+    $sala=$fila['id_sala'];
     $username=$fila['username'];
     $vida = $fila['vida'];
     $id_estado = $fila['id_estado'];
@@ -141,6 +142,7 @@
                 ?>
 
                 <tr>
+                    <td><?php echo $sala?></td>
                     <td><?php echo $username?></td>
                     <td ><?php echo $vida?></td>
                     <td><?php echo $estado?></td>

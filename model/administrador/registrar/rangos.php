@@ -9,8 +9,7 @@
    if (isset($_POST["MM_insert"])&&($_POST["MM_insert"]=="formreg"))
    {
     $nomb_rango= $_POST['nomb_rango'];
-    $lvl_min= $_POST['lvl_min'];
-    $lvl_max= $_POST['lvl_max'];
+
     $nombre = $_FILES['image']['name'];
     $tipo = $_FILES['image']['type'];
     $tamanio = $_FILES['image']['size'];
@@ -26,7 +25,7 @@
         echo '<script>window.location="rangos.php"</script>';
      }
 
-     else if ($nomb_rango=="" || $lvl_min=="" || $lvl_max=="")
+     else if ($nomb_rango=="")
       {
          echo '<script>alert ("Por favor llene todos los campos");</script>';
          echo '<script>window.location="rangos.php"</script>';
@@ -34,7 +33,7 @@
       
       else {
 
-        $insertSQL = $con->prepare("INSERT INTO rangos(nomb_rango, lvl_min, lvl_max, imagen) VALUES('$nomb_rango', $lvl_min, $lvl_max, '$destino')");
+        $insertSQL = $con->prepare("INSERT INTO rangos(nomb_rango, imagen) VALUES('$nomb_rango', '$destino')");
         $insertSQL -> execute();
         echo '<script> alert("REGISTRO EXITOSO");</script>';
         echo '<script>window.location="../consultar/rangos.php"</script>';
@@ -79,18 +78,6 @@ if (isset($_POST['regresar'])) {
             <div class="inputBox">
                 <input type="varchar" name="nomb_rango" placeholder="Digite el nombre">
                 <span>Digite el nombre del rango</span>
-                <i></i>
-            </div>
-
-            <div class="inputBox">
-                <input type="number" name="lvl_min" placeholder="Digite el nombre">
-                <span>Digite el nivel minimo</span>
-                <i></i>
-            </div>
-
-            <div class="inputBox">
-                <input type="number" name="lvl_max" placeholder="Digite el nombre">
-                <span>Digite el nivel maximo</span>
                 <i></i>
             </div>
 

@@ -101,7 +101,7 @@
             <label for="id_arma"></label>
             <select name="id_arma" id="">
                 
-                <option value ="">Seleccione el arma</option>
+                <option value ="">Imagen nombre balas daño</option>
                 <?php
 
                     if ($nivel <= 4) {
@@ -127,7 +127,7 @@
                     $control->execute();
                     while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
                         echo "<option value=" . $fila['id_arma'] . ">"
-                            . $imagen . $espacio1 . $fila['nomb_arma'] .$daño. $espacio2 .$fila['daño'] . ")</option>";
+                            . $imagen . $espacio1 . $fila['nomb_arma'] ."   " .$fila['cant_balas']. $espacio2 .$fila['dano'] . ")</option>";
                     }
                 ?>
 

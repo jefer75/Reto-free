@@ -63,9 +63,8 @@
         
         
 if (isset($_POST['regresar'])) {
-    header('location:../inicio/index.php');
-}
-        
+    header('location:../consultar/avatares.php');
+}    
         ?>
     </header>
     <div class="box">

@@ -54,7 +54,7 @@ if (isset($_POST['regresar'])) {
                         $con_rango->execute();
                         $rangos = $con_rango->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($rangos as $fila) {
-                            $rango= $fila['nomb_rango'];
+                            $rango= $fila['imagen'];
                         }
 
                         $con_estado = $con->prepare("SELECT * FROM estados where id_estado <= $id_estado");
@@ -69,7 +69,7 @@ if (isset($_POST['regresar'])) {
                     <td><?php echo $nombre ?></td> 
                     <td><?php echo $nivel ?></td>
                     <td><?php echo $puntos ?></td>
-                    <td><?php echo $rango ?></td>
+                    <td><img src="<?php echo $rango ?> "alt=""></td>
                     <td><?php echo $estado ?></td>
                     
                     <td><a class="hiper" href="" onclick="window.open

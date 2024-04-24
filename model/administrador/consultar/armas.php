@@ -12,7 +12,7 @@ $con = $db->conectar();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../css/armas.css">
-    <title>Jugadores</title>
+    <title>Armas</title>
 </head>
 <body>
 
@@ -20,6 +20,8 @@ $con = $db->conectar();
 
 if (isset($_POST['regresar'])) {
     header('location:../inicio/index.php');
+} else if (isset($_POST['registrar'])) {
+    header('location:../registrar/arma.php');
 }
 ?>
 
@@ -27,19 +29,21 @@ if (isset($_POST['regresar'])) {
         <td class="cerrar_sesion">
             <input type="submit" value="Regresar" name="regresar" class="regresar"> 
         </td>
+        <td>
+            <input type="submit" value="Registrar" name="registrar" class="registrar"> 
+        </td>
     </form>
     
     <div class="container">
         <form autocomplete="off" name="form_actualizar" method="POST">
             <table>
                 <thead>
-                    <th>Nombre de jugador</th>
-                    <th>Nivel</th>
-                    <th>Puntos</th>
-                    <th>Rango</th>
-                    <th>Estado</th>
+                    <th>Nombre de arma</th>
+                    <th>Tipo de arma</th>
+                    <th>Daño</th>
+                    <th>Cantidad de balas</th>
                     <th>Imagen</th>
-                    <th>Rango minimo</th>
+                    <th>Puntos</th>
                     <th>Accion</th>
                 </thead>
                 <?php
@@ -47,13 +51,12 @@ if (isset($_POST['regresar'])) {
                     $query1->execute();
                     $armas = $query1->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($armas as $fila) {
-                        $id_arma = $fila['id_arma'];
                         $id_tipo_arma = $fila['id_tipo_arma'];
                         $nomb_arma = $fila['nomb_arma'];
                         $daño= $fila['dano'];
                         $cant_balas = $fila['cant_balas'];                        
                         $imagen = $fila['imagen'];
-                        $rango = $fila['id_rango'];
+                        $puntos = $fila['puntos'];
 
                         $con_rango = $con->prepare("SELECT * FROM tipo_armas where id_tipo_arma <= $id_tipo_arma");
                         $con_rango->execute();
@@ -63,14 +66,13 @@ if (isset($_POST['regresar'])) {
                         }
         
                 ?>
-                <tbody>
-                    <td><?php echo $id_arma ?></td> 
+                <tbody> 
                     <td><?php echo $tipo_arma ?></td>
                     <td><?php echo $nomb_arma ?></td>
                     <td><?php echo $daño ?></td>
                     <td><?php echo $cant_balas ?></td>
-                    <td><?php echo $imagen ?></td>
-                    <td><?php echo $rango ?></td>
+                    <td><img src="<?php echo $imagen;?>" width="100" height="100" alt=""></td>
+                    <td><?php echo $puntos ?></td>
                     <td><a class="hiper" href="" onclick="window.open
                 ('act_armas.php?id=<?php echo $id_arma ?>','','width=500, height=400, toolbar=NO'); void(null);">Click Aqui</a></td>
                     

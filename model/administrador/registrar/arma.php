@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("db/connection.php");
+    require_once("../../../db/connection.php");
     // include("../../../controller/validarSesion.php");
     $db = new Database();
     $con = $db -> conectar();
@@ -8,13 +8,18 @@
 
    if ((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="formreg"))
    {
-    $tipo_arma= $_POST['id_tipo_arma'];
-    $nomb_arma= $_POST['nombre'];
+    $tipo_arma= $_POST['tipo_arma'];
+    $nomb_arma= $_POST['nomb_arma'];
     $daño= $_POST['daño'];
     $cant_balas= $_POST['cant_balas'];
-    $imagen= $_POST['imagen'];
-    $id_rango= $_POST['id_'];
-    $id_estado= date('id_estado');
+
+    $nombre = $_FILES['image']['name'];
+    $tipo = $_FILES['image']['type'];
+    $tamanio = $_FILES['image']['size'];
+    $ruta = $_FILES['image']['tmp_name'];
+    $destino = "../../../img/armas/" . $nombre;
+
+    $puntos= $_POST['puntos'];
     
      $sql= $con -> prepare ("SELECT * FROM armas WHERE nomb_arma='$nomb_arma'");
      $sql -> execute();
@@ -22,21 +27,21 @@
 
      if ($fila){
         echo '<script>alert ("Esta arma ya esta en uso");</script>';
-        echo '<script>window.location="registrarse.php"</script>';
+        echo '<script>window.location="arma.php"</script>';
      }
 
-     else if ($tipo_arma=="" || $nomb_arma=="" || $daño=="" || $cant_balas=="" || $imagen=="" || $id_rango="" || $id_estado="")
+     else if ($tipo_arma=="" || $nomb_arma=="" || $daño=="" || $cant_balas=="" || $destino=="" ||$puntos=="" )
       {
          echo '<script>alert ("Por favor llene todos los campos");</script>';
-         echo '<script>window.location="registrarse.php"</script>';
+         echo '<script>window.location="arma.php"</script>';
       }
       
       else {
 
-        $insertSQL = $con->prepare("INSERT INTO armas(id_tipo_arma, nomb_arma, dano, cant_balas, imagen, id_rango, id_estado) VALUES('$tipo_arma', '$nomb_arma', $daño, $cant_balas, $imagen, $i_rango, '$id_rango')");
+        $insertSQL = $con->prepare("INSERT INTO armas(id_tipo_arma, nomb_arma, dano, cant_balas, imagen, puntos) VALUES('$tipo_arma', '$nomb_arma', $daño, $cant_balas, '$destino','$puntos')");
         $insertSQL -> execute();
         echo '<script> alert("REGISTRO EXITOSO");</script>';
-        echo '<script>window.location="login.php"</script>';
+        echo '<script>window.location="../consultar/armas.php"</script>';
      }  
     }
     ?>
@@ -64,7 +69,7 @@
         
         
 if (isset($_POST['regresar'])) {
-    header('location:../inicio/index.php');
+    header('location:../consultar/armas.php');
 }
         
         ?>
@@ -76,9 +81,9 @@ if (isset($_POST['regresar'])) {
             <h2>Crear arma</h2>
         
             <div class="inputBox">
-            <span>Seleccione su avatar</span>
-                <select name="avatar">
-                        <option value ="">Seleccione avatar</option>
+            <span>Seleccione el tipo de arma</span>
+                <select name="tipo_arma">
+                        <option value ="">Seleccione</option>
                         
                         <?php
                             $control = $con -> prepare ("SELECT * from tipo_armas");
@@ -93,7 +98,7 @@ if (isset($_POST['regresar'])) {
             </div>
 
             <div class="inputBox">
-            <input type="varchar" name="nombre" placeholder="Nombre de arma">
+            <input type="varchar" name="nomb_arma" placeholder="Nombre de arma">
             <span>Digite el nombre del arma</span>
             <i></i>
             </div>
@@ -111,38 +116,14 @@ if (isset($_POST['regresar'])) {
             </div>
             
             <div class="inputBox">
-                <input type="file" name="image" accept="image/*" placeholder="Digite la cantidad de balas">
+                <input type="file" accept="image/*"  name="image" required>
                 <span>Adjute la imagen</span>
                 <i></i>
             </div>
-            
+
             <div class="inputBox">
-                <span>Seleccione el ranngo minimo que va a tener esa armarango</span>
-                <select name="avatar">
-                        <option value =""></option>
-                        
-                        <?php
-                            $control = $con -> prepare ("SELECT * from rangos");
-                            $control -> execute();
-                        while ($fila = $control->fetch(PDO::FETCH_ASSOC)) 
-                        {
-                            echo "<option value=" . $fila['id_rango'] . ">"
-                            . $fila['rango'] .$fila['nomb_rango'] . "</option>";
-                        } 
-                        ?>
-                </select>
-                <i></i>
-            </div>
-            
-            
-            <div class="inputBox">
-                <input type="password" name="contrasena" placeholder="Digite una contraseña">
-                <span>Digite su contraseña</span>
-                <i></i>
-            </div>
-            <div class="inputBox">
-                <input type="password" name="conf_contra" placeholder="Repita la contraseña">
-                <span>Confirme la contraseña</span>
+                <input type="number" name="puntos" placeholder="Digite la cantidad de puntos">
+                <span>Digite los puntos que otorga</span>
                 <i></i>
             </div>
 

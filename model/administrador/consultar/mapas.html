@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/mapas.css">
+    <title>Mapas</title>
+</head>
+<body>
+    
+<header>
+        <form action="" method="POST">
+        
+        <td>
+        
+            <input type="submit" value="Regresar" name="regresar" id="regresar"> 
+        </td>
+        
+        </tr>
+        </form>
+        <?php 
+        
+        if(isset($_POST['regresar']))
+        {        
+            header('location:../inicio/index.php');
+        }
+        
+        ?>
+    </header>
+    
+    <div class="container">
+
+    <h1 class="title">Mapas</h1>
+        <table>
+            <thead> 
+                <th>Nombre del mapa</th>
+                <th>Mapa</th>
+            </thead>
+            
+           
+            <tr>
+                <td><?php echo $nombre?></td>
+                <td><img src="<?php echo $mundo;?>" width="100" height="100" alt=""></td>
+                <td>
+                
+            </tr>
+           
+         
+        </table>
+
+    </div>
+</body>
+</html>

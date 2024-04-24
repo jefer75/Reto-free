@@ -55,7 +55,6 @@
                 }
             ?> 
 
-            <img src="<?php echo $avatar; ?>" width="110" height="110" alt="">
             <div class="texto">
                 <h4><?php echo $username; ?></h4> 
             </div>

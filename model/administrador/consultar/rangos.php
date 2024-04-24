@@ -49,8 +49,6 @@
         <table>
             <thead> 
                 <th>Nombre de rango</th>
-                <th>Nivel minimo</th>
-                <th>Nivel Maximo</th>
                 <th>Imagen</th>
             </thead>
             
@@ -61,13 +59,9 @@
                 $arma = $query1->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($arma as $fila) {
                 $nombre = $fila['nomb_rango'];
-                $lvl_min = $fila['lvl_min'];
-                $lvl_max = $fila['lvl_max'];
             ?>
             <tr>
                 <td><?php echo $nombre?></td>
-                <td><?php echo $lvl_min?></td>
-                <td><?php echo $lvl_max?></td>
                 <td><img class="imagenes" src="<?php echo $fila['imagen'];?>" width="100" height="100" alt="Imagen"></td>
                 
             </tr>

@@ -7,7 +7,6 @@ $con = $db->conectar();
 
 $username = $_SESSION['username'];
 
-
 //consulta el nivel del usuario
         $query = $con->prepare("SELECT * FROM usuarios Where username='$username'");
         $query->execute();
@@ -16,33 +15,17 @@ $username = $_SESSION['username'];
             $nivel = $fila['nivel'];
         }
 
-
-//condicional para mostrar armas y mapas segun el nivel del jugador en los select
-if ($nivel <= 4) {
-    $id_mapa = 1;
-    $lvl_min=1;
-} else if ($nivel >= 5 and $nivel <= 9) {
-    $id_mapa = 2;
-    $lvl_min=5;
-} else if ($nivel >= 10 and $nivel <= 14) {
-    $id_mapa = 3;
-    $lvl_min=10;
-} else if ($nivel >= 15 and $nivel <= 19) {
-    $id_mapa = 4;
-    $lvl_min=15;
-} else if ($nivel >= 20 and $nivel  <= 24) {
-    $id_mapa = 5;
-    $lvl_min=20;
-} 
-    $lvl_max=$lvl_min+4;
-    if ($nivel >= 25){
-        $lvl_min=25;
-        $lvl_max=100;
-    }
+        switch($nivel){
+            case 1:
+                $mapas=2;
+                break;
+            case 2:
+                $mapas=4;
+                break;
+        }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
     
-    $num_jug = 1;
     $id_mundo = $_POST['id_mundo'];
     
     if ($id_mundo == "") {
@@ -54,7 +37,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
     } else { 
                 
             //consulta si hay una sala que tenga  menos de 5 jugadores, con el mundo indicado
-            $fila = $con->prepare("SELECT * FROM salas WHERE id_mundo = $id_mundo AND lvl_min <= $nivel AND lvl_max >= $nivel AND num_jug <=5");
+            $fila = $con->prepare("SELECT * FROM salas WHERE id_mundo = $id_mundo AND nivel = $nivel AND num_jug <=5");
             $fila->execute();
             $numero_jugadores = $fila->fetchAll(PDO::FETCH_ASSOC);
                 
@@ -71,7 +54,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
             //agrega 1 al numero de jugadores en la sala seleccionada de la tabla salas
 
             //actualiza el numero de jugadores de la sala encontrada
-            $actualizar_num_jug = $con->prepare("UPDATE salas SET num_jug=$num_jug WHERE id_sala = $id_sala");
+            $actualizar_num_jug = $con->prepare("UPDATE salas SET num_jug=$num_jug+1 WHERE id_sala = $id_sala");
             $actualizar_num_jug->execute();
 
             
@@ -81,7 +64,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
         else {
     
             //crea una sala con el mundo seleccionado por el usuario
-            $fila = $con->prepare("INSERT INTO salas (lvl_min, lvl_max, num_jug, id_mundo) VALUES ( $lvl_min, $lvl_max,1, $id_mundo)");
+            $fila = $con->prepare("INSERT INTO salas (nivel, num_jug, id_mundo) VALUES ( $nivel, 1, $id_mundo)");
             $fila->execute();
         }
             //consulta el identificador de la sala que acabamos de crear
@@ -147,11 +130,14 @@ if (isset($_POST['regresar'])) {
                 <option value ="">Seleccione el mapa</option>
 
                 <?php
+
+                
+
                     $imagen = "IMAGEN";
                     $espacio1 = ".   ";
                     $espacio2 = ".    (+";
 
-                    $control = $con->prepare("SELECT * from mundos WHERE id_mundo <= $id_mapa");
+                    $control = $con->prepare("SELECT * from mundos WHERE id_mundo <= $mapas");
                     $control->execute();
                     while ($fila = $control->fetch(PDO::FETCH_ASSOC)) {
                         echo "<option value=" . $fila['id_mundo'] . ">"

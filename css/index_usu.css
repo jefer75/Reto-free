@@ -6,74 +6,50 @@ body {
 }
 
 .menu-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color:  rgb(245, 190, 11);
-  color: white;
-  z-index: 1000;
+  background-color: black;
+  opacity: .9;
+  width: 81em;
+  margin-top: 0;
+  padding: 2%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.menu {
-  display: block;
-  justify-content: center;
-  padding: 20px 0; /* Ajusta el valor vertical según sea necesario */
 }
 
-.menu a {
-  display: inline-block;
-  color: rgb(6, 6, 6);
-  font-size: 20px;
+.menu-container h4{
+  color: wheat;
+  font-size: 2em;
+  margin: 0 20% 0 5%;
+  padding: 1%;
+}
+
+.menu-container h4:hover{
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.menu-container a{
+  width: 8%;
+  color: wheat;
+  font-size: 150%;
   text-decoration: none;
-  margin: 0 10px; /* Ajusta el espaciado entre botones */
-  padding: 5px 30px;
-  border-radius: 5px;
-  transition: background-color 0.3s, transform 0.3s; /* Añade una transición suave */
 }
 
-.menu a:hover {
-  background-color: whit; /* Cambia el color de fondo al pasar el cursor */
-  background-color: rgba(66, 64, 64, 0.437); /* Cambia el color de fondo al pasar el cursor */
-  transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el cursor */
-}
-
-#menu-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  float: right;
-  margin-right: 10px;
-  margin-top: 10px;
-}
-
-.container {
-  display: block;
-  width: 20%;
-  margin-top: 2%;
-  opacity: .8;
-  border-radius: 2em;
-}
-
-.sidebar {
-  height: 25em;
-  width: 50%;
-  background-color: #080808;
-  color:White;
-  font-size: 200%;
-  padding: 100px;
+.menu-container a:hover{
+  text-align: center;
+  padding-top: 1%;
+  background-color: rgb(245, 190, 11);
+  color: black;
+  border: solid 1px white;
+  border-radius: 1em;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); 
 }
 
 #cerrar_sesion {
   border-radius: 2em;
   background: rgb(245, 190, 11);
-  padding: 8px;
-  font-size: 20px;
-  transition: box-shadow 0.5s; /* Agrega una transición suave al cambio de sombra */
+  padding: 5%;
+  font-size: 1em;
+  transition: box-shadow 0.5s;
+  margin-left: 15em;
+   /* Agrega una transición suave al cambio de sombra */
 }
 
 #cerrar_sesion:hover {
@@ -81,17 +57,42 @@ body {
   background-color: white;
 }
 
-h4{
-  margin-top: 70%;
-  padding: 5%;
+.sidebar {
+  width: 15%;
+  height: 16em;
+  background-color: #080808;
+  opacity: .8;
+  color:White;
+  font-size: 200%;
+  padding: 5% 5% 0.52% 5%;
 }
-.sidebar p{
-  padding: 10%;
-  
+
+.avatar{
+  width: 60%;
+  height: 13vh;
+  margin-top: 30%;
 }
-h4:hover, .sidebar p:hover {
+
+.rangos{
+  width: 100%;
+  display: inline-block;
+}
+
+.rango{
+  width: 40%;
+  display: inline-block;
+
+}
+
+.rangos p{
+  width: 100%;
+  display: flex;
+}
+
+
+.sidebar p:hover , .sidebar img:hover{
   border: solid 1px white;
-  padding: 10%;
+  padding: 5%;
   border-radius: 4px;
 
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Cambia la sombra cuando se pasa el cursor sobre el botón */
@@ -102,12 +103,14 @@ h4:hover, .sidebar p:hover {
     opacity: .9;
     position: fixed;
     right: 5%;
-    top: 55%;
+    top: 60%;
     transform: translateY(-50%) scale(1);
     transition: transform 0.3s;
-    max-width: 70em;
-    width: 45em;
-    height: 30em;
+    max-width: 50%;
+    min-width: 40%;
+    width: 42em;
+    min-height: 25vh;
+    height: 26em;
     border: 30px solid #080808;
     box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
     overflow: hidden;

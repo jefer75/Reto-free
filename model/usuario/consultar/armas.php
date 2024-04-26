@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../../db/connection.php";
+require_once "../../../db/connection.php";
 // include("../../../controller/validarSesion.php");
 $db = new Database();
 $con = $db->conectar();
@@ -14,22 +14,13 @@ foreach ($resultados as $fila) {
     $nivel = $fila['nivel'];
 }
 
-if ($nivel <= 4) {
-    $rango_min = 1;
-} else if ($nivel >= 5 and $nivel <= 9) {
-    $rango_min = 2;
-} else if ($nivel >= 10 and $nivel <= 14) {
-    $rango_min = 3;
-} else if ($nivel >= 15 and $nivel <= 19) {
-    $rango_min = 4;
-} else if ($nivel >= 20 and $nivel <= 24) {
-    $rango_min = 5;
-} else if ($nivel >= 25 and $nivel <= 29) {
-    $rango_min = 6;
-}  else if ($nivel > 29) {
-    $rango_min = 7;
-}
-
+if ($nivel == 1) {
+    $tipo_arma = 2;
+} else if ($nivel == 2) {
+    $tipo_arma = 4;
+} else if ($nivel == 3) {
+    $tipo_arma = 6;
+} 
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +28,7 @@ if ($nivel <= 4) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/armas.css">
+    <link rel="stylesheet" href="../../../css/armas.css">
     <title>Armas</title>
 </head>
 <body>
@@ -55,7 +46,7 @@ if ($nivel <= 4) {
         <?php
 
 if (isset($_POST['regresar'])) {
-    header('location:index.php');
+    header('location:../inicio/index.php');
 }
 
 ?>
@@ -86,7 +77,7 @@ if (isset($_POST['regresar'])) {
                         $imagen = $fila['imagen'];
                         $id_estado = $fila['id_estado'];
 
-                        $act_disponible = $con->prepare("UPDATE `armas` SET id_estado='5' WHERE id_arma <= $tipo_arma");
+                        $act_disponible = $con->prepare("UPDATE `armas` SET id_estado='6' WHERE id_arma > $tipo_arma");
                         $act_disponible->execute();
 
                         $tipo = $con->prepare("SELECT * FROM tipo_armas where id_tipo_arma <= $id_tipo_armas");
@@ -109,7 +100,7 @@ if (isset($_POST['regresar'])) {
                     <td><?php echo $tipo ?></td>
                     <td><?php echo $cant_balas ?></td>
                     <td><?php echo $daño ?></td>
-                    <td><?php echo $imagen ?></td>
+                    <td><img src="<?php echo $imagen ?>" width="100"></td>
                     <td
                     <?php
                         if ($id_estado==5){

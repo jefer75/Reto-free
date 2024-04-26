@@ -1,55 +1,11 @@
 <?php
     session_start();
-    require_once("../../db/connection.php");
+    require_once("../../../db/connection.php");
     // include("../../../controller/validarSesion.php");
     $db = new Database();
     $con = $db -> conectar();
 
     $username= $_SESSION['username'];
-
-
-    if ((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="formreg"))
-   {
-    $username= $_POST['username'];
-    $edad= $_POST['edad'];
-    $id_avatar= $_POST['avatar'];
-    $id_rango= 1;
-    $puntos= 0;
-    $nivel= 1;
-    $correo= $_POST['correo'];
-    $contrasena= $_POST['contrasena'];
-    $conf_contra= $_POST['conf_contra'];
-    $f_ingreso= date('Y-m-d');
-    $id_estado= 1;
-    $id_tipo_user= 2; 
-
-     $sql= $con -> prepare ("SELECT * FROM usuarios WHERE username='$username'");
-     $sql -> execute();
-     $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
-
-     if ($fila){
-        echo '<script>alert ("Este nombre de usuario ya esta en uso");</script>';
-        echo '<script>window.location="registrarse.php"</script>';
-     }
-
-     else
-   
-     if ($username=="" || $edad=="" || $id_avatar=="" || $correo=="" || $contrasena=="")
-      {
-         echo '<script>alert ("Por favor llene todos los campos");</script>';
-         echo '<script>window.location="registrarse.php"</script>';
-      }
-      
-      else if ($contrasena==$conf_contra){
-
-        $encriptado = password_hash($contrasena,PASSWORD_DEFAULT, array("pass"=>12));
-        
-        $insertSQL = $con->prepare("INSERT INTO usuarios(username, edad, id_avatar, id_rango, puntos, nivel, correo, contrasena, f_ingreso, id_estado, id_tipo_user) VALUES('$username', '$edad', $id_avatar, $id_rango, $puntos, $nivel, '$correo', '$encriptado', '$f_ingreso', $id_estado, $id_tipo_user)");
-        $insertSQL -> execute();
-        echo '<script> alert("REGISTRO EXITOSO");</script>';
-        echo '<script>window.location="login.php"</script>';
-     }  
-    }
 ?>
 
 <!DOCTYPE html>
@@ -60,10 +16,83 @@
     <title>Mis partidas</title>
 </head>
 <body>
+
+<header>
+        <form action="" method="POST">
+
+        <td>
+
+            <input type="submit" value="Regresar" name="regresar" id="regresar">
+        </td>
+
+        </tr>
+        </form>
+        <?php
+
+if (isset($_POST['regresar'])) {
+    header('location:../inicio/index.php');
+}
+
+?>
+    </header>
     
     <div class="container">
 
-        
+    <div class="tabla">
+            <table>
+                <tr>
+                    <th>Id Partida</th>
+                    <th>Sala</th>
+                    <th>Puntos</th>
+                    <th>Kills</th>
+                    <th>Mundo</th>
+                </tr>
+                <?php
+    
+                $sql= $con -> prepare ("SELECT * FROM partidas ");
+                $sql -> execute();
+                $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
+
+                if ($fila){
+
+                    foreach ($fila as $fila){
+
+                        $id_partida=$fila['id_partida'];
+                        $id_sala=$fila['id_sala'];
+                        $puntos=$fila['puntos'];
+                        $kills=$fila['kills'];
+                    }                    
+                    $sql= $con -> prepare ("SELECT * FROM salas WHERE id_sala='$id_sala'");
+                    $sql -> execute();
+                    $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($fila as $fila){
+
+                        $id_mundo=$fila['id_mundo'];
+                    }        
+
+                        $sql= $con -> prepare ("SELECT * FROM mundos WHERE id_mundo='$id_mundo'");
+                        $sql -> execute();
+                        $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($fila as $fila){
+
+                            $mundo=$fila['imagen'];
+                        }         
+
+
+?>
+                <tr>
+                    <td><?php echo $id_partida ?></td>
+                    <td><?php echo $id_sala ?></td>
+                    <td><?php echo $puntos ?></td>
+                    <td><?php echo $kills?></td>
+                    <td><img src="<?php echo $mundo?>" width="100"></td>
+                </tr>
+                <?php
+                }
+                ?>
+
+            </table>
+        </div>
 
     </div>
 

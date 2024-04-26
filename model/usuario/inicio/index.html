@@ -1,12 +1,4 @@
-<?php
-session_start();
-require_once "../../../db/connection.php";
-// include("../../../controller/validarSesion.php");
-$db = new Database();
-$con = $db->conectar();
 
-$username = $_SESSION['username'];
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,76 +10,37 @@ $username = $_SESSION['username'];
 </head>
 <body>
 
-        <?php
-if (isset($_POST['cerrar_sesion'])) {
-    session_destroy();
-    header('location:../../../index.html');
-}
-
-?>
 
     <div class="menu-container">
-      
-            <h4><?php echo $username; ?></h4>
-            <a href="../consultar/reportes.php" class="btn">Informe</a>
-            <a href="../consultar/armas.php" class="btn">Armas</a>
-            <a href="../consultar/mapas.php" class="btn">Mapas</a>
-            <a href="../juego/seleccion.php" class="btn_jugar">Jugar</a>
         
-        <form action="" method="POST">
+            <h4>pablito</h4>
+            <a href="../consultar/reportes.php" class="btn">Resultados</a>
+            <a href="../consultar/armas.php" class="btn">Armas</a>
+            <a href="../consultar/mapas.php" class="btn">mapas</a>
+            <a href="../juego/seleccion.php" class="btn_jugar">Jugar</a>
+            <form action="" method="POST">
         <td>
             <input type="submit" value="Cerrar Sesion" name="cerrar_sesion" id="cerrar_sesion">
         </td>
+        
+    </tr>
+</form>
 
-        </tr>
-        </form>
-    </div>
+</div>
 
     <div class="container">
     <div class="sidebar">
     
 
 
-        <?php
-
-$query = $con->prepare("SELECT * FROM usuarios Where username='$username'");
-$query->execute();
-$resultados = $query->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($resultados as $fila) {
-
-    $id_avatar = $fila['id_avatar'];
-    $username = $fila['username'];
-    $nivel = $fila['nivel'];
-    $puntos = $fila['puntos'];
-    $id_rango = $fila['id_rango'];
-
-    $query2 = $con->prepare("SELECT * FROM rangos where id_rango =$id_rango");
-    $query2->execute();
-    $rango = $query2->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($rango as $fila) {
-
-        $rango = $fila['imagen'];
-        $nomb_rango = $fila['nomb_rango'];
-    }
-
-
-$query1 = $con->prepare("SELECT * FROM avatares where id_avatar =$id_avatar");
-$query1->execute();
-$avatar = $query1->fetchAll(PDO::FETCH_ASSOC);
-foreach ($avatar as $fila) {
-
-    ?>
-
-
             <img src="<?php echo $avatar = $fila['imagen'];
 } ?>" width="100" height="100" class="">
             <div class="texto">
             
-            <p>Lvl <?php echo $nivel; ?></p>
-            <p>Pts <?php echo $puntos; ?></p>
+            <p>Level </p>
+            <p>Puntos </p>
             <img src="<?php echo $rango; }?>" width="70" height="70" alt="">
-            <p><?php echo $nomb_rango; ?></p>    
+            <p>rango</p>    
         </div>
         </div>
     </div>

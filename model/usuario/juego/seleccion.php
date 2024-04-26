@@ -83,7 +83,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
                 $kills = 0;
                 $estado = 3;
 
-                $insert_jug = $con->prepare("INSERT INTO `jugadores`(`username`, `id_sala`, `vida`, `daño_real`, `kills`, `id_estado`) VALUES ('$username',$id_sala, $vida, $daño_real, $kills, $estado)");
+                $insert_jug = $con->prepare("INSERT INTO `jugadores`(`username`, `id_sala`, `vida`, `dano_real`, `kills`, `id_estado`) VALUES ('$username',$id_sala, $vida, $daño_real, $kills, $estado)");
                 $insert_jug->execute();
 
         echo '<script> alert("INGRESO EXITOSO");</script>';
@@ -115,7 +115,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
         <?php
 
 if (isset($_POST['regresar'])) {
-    header('location:index.php');
+    header('location:../inicio/index.php');
 }
 
 ?>

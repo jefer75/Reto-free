@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../db/connection.php");
+    require_once("../../../db/connection.php");
     // include("../../../controller/validarSesion.php");
     $db = new Database();
     $con = $db -> conectar();
@@ -17,32 +17,26 @@
                 $nivel=$fila['nivel'];
 
             }
-    
-            if ($nivel < 5){
-                $id_mundo=1;        
-            }
-            else if ($nivel >= 5 AND $nivel <= 9){
-                $id_mundo=2;                
-            }
-            else if ($nivel >= 10 AND $nivel <= 14){
-                $id_mundo=3;               
-            }
-            else if ($nivel >= 15 AND $nivel <= 19){
-                $id_mundo=4;               
-            }
-            else if ($nivel >= 20){
-                $id_mundo=5;                
-            }
 
+            switch($nivel){
+                case 1:
+                    $id_mundo=2;        
+                    break;
+                case 2:
+                    $id_mundo=4;                
+                    break;
+                    case 3:
+                    $id_mundo=5;               
+                    break;
+            }
             
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/mapas.css">
+    <link rel="stylesheet" href="../../../css/mapas.css">
     <title>Mapas</title>
 </head>
 <body>
@@ -61,7 +55,7 @@
         
         if(isset($_POST['regresar']))
         {        
-            header('location:index.php');
+            header('location:../inicio/index.php');
         }
         
         ?>
@@ -84,10 +78,10 @@
                 $arma = $query1->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($arma as $fila) {
                 $nombre = $fila['nomb_mundo'];
-                $mundo = $fila['mundo'];
+                $imagen = $fila['imagen'];
                 $id_estado = $fila['id_estado'];
 
-                $act_disponible = $con->prepare("UPDATE mundos SET id_estado='5' WHERE id_mundo <= $id_mundo");
+                $act_disponible = $con->prepare("UPDATE mundos SET id_estado=6 WHERE id_mundo > $id_mundo");
                 $act_disponible->execute();
 
                 $con_estado = $con->prepare("SELECT * FROM estados where id_estado <= $id_estado");
@@ -99,7 +93,7 @@
             ?>
             <tr>
                 <td><?php echo $nombre?></td>
-                <td><?php echo $mundo?></td>
+                <td><img src="<?php echo $imagen?>" width="100"></td>
                 <td 
                 <?php
                     if ($id_estado==5){

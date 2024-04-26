@@ -7,6 +7,14 @@
 
     $username= $_SESSION['username'];
 
+    $jug_atacado = $con -> prepare("SELECT * FROM jugadores WHERE username ='$username'");
+    $jug_atacado -> execute ();
+    $atacado = $jug_atacado -> fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($atacado as $fila){
+        $kills = $fila['kills'];
+    }    
+
     ?>
 
 <?php
@@ -47,19 +55,24 @@
             $daños = $con_daño -> fetchAll(PDO::FETCH_ASSOC);
             
             foreach ($daños as $fila){
-                $daño = $fila ['dano'];
+                $daño = $fila ['dano']; 
             }
 
             $actualizado= $vida - $daño;
+            
 
             if($actualizado <= 0){
     
                 $actualizado = 0;
                 $estado = 4;
+                $kills=$kills+1;
             }            
     
             $actualizar= $con -> prepare ("UPDATE jugadores SET vida='$actualizado', id_estado='$estado' WHERE username = '$user_atacado'");
             $actualizar -> execute();
+
+            $subir_puntos= $con -> prepare ("UPDATE jugadores SET dano_real=+$daño, kills='$kills' WHERE username = '$username'");
+            $subir_puntos -> execute();
             
             echo '<script> alert ("Ataque realizado con exito");</script>';
             echo '<script> window.close(); </script>';
@@ -104,20 +117,10 @@
                 <option value ="">Imagen nombre balas daño</option>
                 <?php
 
-                    if ($nivel <= 4) {
-                        $tipo_arma = 3;
-                    } else if ($nivel >= 5 and $nivel <= 9) {
-                        $tipo_arma = 6;
-                    } else if ($nivel >= 10 and $nivel <= 14) {
-                        $tipo_arma = 9;
-                    } else if ($nivel >= 15 and $nivel <= 19) {
-                        $tipo_arma = 12;
-                    } else if ($nivel >= 20 and $nivel <= 24) {
-                        $tipo_arma = 15;
-                    } else if ($nivel >= 25 and $nivel <= 29) {
-                        $tipo_arma = 18;
-                    }  else if ($nivel > 29) {
-                        $tipo_arma = 21;
+                    if ($nivel == 1) {
+                        $tipo_arma = 2;
+                    } else if ($nivel == 2 ) {
+                        $tipo_arma = 4;
                     }
                     $imagen = "IMAGEN";
                     $espacio1 = "   '";

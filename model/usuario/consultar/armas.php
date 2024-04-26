@@ -14,13 +14,17 @@ foreach ($resultados as $fila) {
     $nivel = $fila['nivel'];
 }
 
-if ($nivel == 1) {
-    $tipo_arma = 2;
-} else if ($nivel == 2) {
-    $tipo_arma = 4;
-} else if ($nivel == 3) {
-    $tipo_arma = 6;
-} 
+switch($nivel){
+    case 1:
+        $tipo_arma=2;        
+        break;
+    case 2:
+        $tipo_arma=4;                
+        break;
+        case 3:
+        $tipo_arma=5;               
+        break;
+}
 ?>
 
 <!DOCTYPE html>

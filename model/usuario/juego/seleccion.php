@@ -98,7 +98,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elige tu arma</title>
+    <title>Elige el mapa</title>
 </head>
 <body>
 

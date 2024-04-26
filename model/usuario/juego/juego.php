@@ -6,6 +6,18 @@
     $con = $db -> conectar();
 
     $username= $_SESSION['username'];
+    
+        //consulta los puntos que tiene el jugador en su perfil
+        $con_puntos = $con->prepare("SELECT * FROM usuarios WHERE username = '$username'");
+        $con_puntos->execute();
+        $puntos_jug= $con_puntos->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($puntos_jug as $fila) {
+        
+            //declara la variable puntos, que es donde va a quedar el puntaje del usuario
+            $puntos = $fila['puntos'];
+        }
+
 
         //consulta la sala en la que se encuentra el jugador
         $fila = $con->prepare("SELECT * FROM jugadores WHERE username = '$username'");
@@ -14,28 +26,24 @@
         
             foreach ($sala as $fila) {
             
-                //declara las variables del registro que encontro
+                //declara la sala donde esta el jugador
                 $id_sala = $fila['id_sala'];
+                $vida = $fila['vida'];
             }
-        
-            $con_puntos = $con->prepare("SELECT * FROM usuarios WHERE username = '$username'");
-            $con_puntos->execute();
-            $puntos_jug= $con_puntos->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach ($puntos_jug as $fila) {
             
-                //declara las variables del registro que encontro
-                $puntos = $fila['puntos'];
-            }
-
         //consulta el mundo de esa sala
-        $con_estado = $con -> prepare("SELECT * FROM salas WHERE id_sala ='$id_sala'");
+        $con_estado = $con -> prepare("SELECT salas.id_sala, salas.id_mundo, salas.num_jug, mundos.id_mundo, mundos.nomb_mundo FROM salas inner JOIN mundos ON salas.id_mundo = mundos.id_mundo WHERE salas.id_sala='$id_sala'");
         $con_estado -> execute ();
         $estados = $con_estado -> fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($estados as $fila){
+            //consulta el mundo y su nombre
             $id_mundo= $fila ['id_mundo'];
+            $nomb_mundo= $fila ['nomb_mundo'];
+            $num_jug= $fila ['num_jug'];
         }
+
+
         
         //condicional para la resta de puntos del jugador
         if ($puntos >= 20){
@@ -50,19 +58,6 @@
         //actualiza la cantidad de puntos del jugador en su perfil
         $resta_puntos= $con -> prepare ("UPDATE usuarios SET puntos=$actualizado WHERE username = '$username'");
         $resta_puntos -> execute();
-
-        //consulta la sala en la que se encuentra el jugador
-        $fila = $con->prepare("SELECT * FROM `salas` WHERE id_sala = $id_sala");
-        $fila->execute();
-        $numero_jugadores = $fila->fetchAll(PDO::FETCH_ASSOC);
-
-            foreach ($numero_jugadores as $fila) {
-            
-                //declara las variables del registro que encontro
-                $id_sala = $fila['id_sala'];
-                $num_jug = $fila['num_jug'];
-    
-            }
 
             $num_jug = $num_jug - 1;
 
@@ -87,18 +82,10 @@
 
     }
 
-        $con_vida = $con->prepare("SELECT * FROM `jugadores` WHERE username ='$username'");
-        $con_vida->execute();
-        $vidas = $con_vida->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($vidas as $fila) {
-            
-                    //declara las variables del registro que encontro
-            $vida = $fila['vida'];
-        }
         
     if ($vida== 0){
-
+        $insertar_datos = $con->prepare("INSERT INTO `partidas`(id_sala, username, puntos, kills) VALUES ($id_sala, '$username', $puntos, $kills)");
+        $insertar_datos->execute();
         echo"<script>alert('Has quedado eliminado') </script>";
         
         header('location:../inicio/index.php');
@@ -119,36 +106,24 @@
     <title>Juega</title>
 </head>
 <body <?php
-                        if ($id_mundo==1){
-                        echo"class='bermuda'";
-                        }
-                        else if($id_estado==2){
-                            echo"class='purgatorio'";
-                        }
-                        else if($id_estado==3){
-                            echo"class='nexterra'";
-                        }
-                        else if($id_estado==4){
-                            echo"class='alpes'";
-                        }
-                        else if($id_estado==5){
-                            echo"class='kalahari'";
-                        }
-                        
-                    ?>
-                    >
-
-    <?php
-        $con_vida = $con->prepare("SELECT * FROM `mundos` WHERE id_mundo ='$id_mundo'");
-        $con_vida->execute();
-        $vidas = $con_vida->fetchAll(PDO::FETCH_ASSOC);
-    
-            foreach ($vidas as $fila) {
-            
-                //declara las variables del registro que encontro
-                $nomb_mundo = $fila['nomb_mundo'];
-            }
-    ?>
+            switch($id_mundo){
+                case 1:
+                    echo"class='bermuda'";
+                    break;
+                case 2:
+                    echo"class='purgatorio'";  
+                    break;
+                case 3:
+                    echo"class='nexterra'";
+                    break;
+                case 4:
+                    echo"class='alpes'";
+                    break;
+                case 5:
+                    echo"class='kalahari'";
+                    break;
+            }   
+                    ?>>
     
     <h2><?php echo $nomb_mundo?></h2>
     <div class="container">
@@ -163,25 +138,18 @@
                     <th>Accion</th>
                 </tr>
                 
-                <?php    
-    $con_jugadores = $con->prepare("SELECT * FROM jugadores WHERE username != '$username' AND id_estado=3");
-    $con_jugadores->execute();
-    $jugadores = $con_jugadores->fetchAll(PDO::FETCH_ASSOC);
+                <?php
+                    $con_jugadores = $con->prepare("SELECT jugadores.id_sala, jugadores.username, jugadores.vida, jugadores.kills, jugadores.id_estado, estados.estado FROM jugadores inner JOIN estados ON jugadores.id_estado = estados.id_estado WHERE jugadores.username !='$username' AND jugadores.id_estado=3");
+                    $con_jugadores->execute();
+                    $jugadores = $con_jugadores->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($jugadores as $fila){
-    $sala=$fila['id_sala'];
-    $user=$fila['username'];
-    $vida = $fila['vida'];
-    $id_estado = $fila['id_estado'];
-    $kills = $fila['kills'];
-
-        $mostrar_estado = $con -> prepare("SELECT * FROM estados WHERE id_estado = $id_estado");
-        $mostrar_estado -> execute ();
-        $estados = $mostrar_estado -> fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($estados as $fila){
-            $estado = $fila ['estado'];
-        }
+                    foreach ($jugadores as $fila){
+                    $sala=$fila['id_sala'];
+                    $user=$fila['username'];
+                    $vida = $fila['vida'];
+                    $kills = $fila['kills'];
+                    $estado = $fila ['estado'];
+                        
                 ?>
 
                 <tr>
@@ -197,22 +165,6 @@
                 
                 <?php
                 }
-
-                $con_vida = $con->prepare("SELECT * FROM `jugadores` WHERE username ='$username'");
-                $con_vida->execute();
-                $vidas = $con_vida->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($vidas as $fila) {
-            
-                    //declara las variables del registro que encontro
-                    $id_sala = $fila['id_sala'];
-                    $vida = $fila['vida'];
-                    $puntos = $fila['dano_real'];
-                    $kills = $fila['kills'];
-                }
-
-                $insertar_datos = $con->prepare("INSERT INTO `partidas`(id_sala, username, puntos, kills) VALUES ($id_sala, '$username', $puntos, $kills)");
-                $insertar_datos->execute();
 
                 $abandonar= $con -> prepare ("DELETE FROM jugadores WHERE vida = 0");
                 $abandonar -> execute();

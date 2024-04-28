@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../css/mapas.css">
+    <link rel="stylesheet" href="../../../css/usuarios.css">
     <title>Mapas</title>
 </head>
 <body>
@@ -68,17 +68,7 @@
             <tr>
                 <td><?php echo $nombre?></td>
                 <td><img src="<?php echo $mundo;?>" width="100" height="100" alt=""></td>
-                <td 
-                <?php
-                    if ($id_estado==5){
-                        
-                    echo"class='estado_'";
-                    
-                    }
-                    else if($id_estado==6){
-                        echo"class='estado_red'";
-                    }
-                ?>
+                
             </tr>
             <?php
                   }

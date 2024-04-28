@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../css/reportes.css">
+    <link rel="stylesheet" href="../../../css/mapas.css">
     <title>Mis partidas</title>
 </head>
 <body>

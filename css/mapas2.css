@@ -2,14 +2,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: url('../img/index_usu.jpg') no-repeat center center fixed;
+    background: url('../img/index_usu.jpg') no-repeat center center fixed; 
     background-size: cover; 
     color: rgb(246, 241, 241); 
 }
 
 .container {
     width: 80%;
-    margin: 150px auto; 
+    margin: 56px auto; 
     background-color: rgba(19, 18, 18, 0.945); 
     padding: 20px;
     border-radius: 10px;
@@ -73,9 +73,8 @@ th:last-child, td:last-child {
     background-color: red;
     color: white;
     font-weight: bold;
-}
+} 
 
-td:hover {
+td:hover{
     background-color: rgba(255, 255, 255, 0.1);
 }
-

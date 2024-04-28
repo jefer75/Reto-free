@@ -2,14 +2,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: url('../img/index_usu.jpg') no-repeat center center fixed;
+    background: url('../img/index_admin.jpg') no-repeat center center fixed;
     background-size: cover; 
     color: rgb(246, 241, 241); 
 }
 
 .container {
     width: 80%;
-    margin: 150px auto; 
+    margin: 250px auto; 
     background-color: rgba(19, 18, 18, 0.945); 
     padding: 20px;
     border-radius: 10px;
@@ -31,8 +31,8 @@ th, td {
 }
 
 th {
-    background-color: #dc0fa2; 
-    color: #ffffff; 
+    background-color: #efb907; 
+    color: #000000; 
     text-transform: uppercase; 
 }
 
@@ -50,7 +50,7 @@ th:last-child, td:last-child {
     left: 20px;
     padding: 10px 20px; 
     z-index: 3; 
-    background: #dc0fa2;
+    background: #efb907;
     font-size: 18px; 
     border-radius: 30px; 
     font-weight: 600;
@@ -58,10 +58,11 @@ th:last-child, td:last-child {
 }
 
 #regresar:hover {
-    background-color: #ffffff; /* Cambia el color de fondo al pasar el cursor */
+    background-color: #ffffffe8; /* Cambia el color de fondo al pasar el cursor */
     color: rgb(0, 0, 0); /* Cambia el color del texto al pasar el cursor */
     transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
 }
+
 
 .estado_ {
     background-color: green;
@@ -74,8 +75,6 @@ th:last-child, td:last-child {
     color: white;
     font-weight: bold;
 }
-
-td:hover {
+td:hover{
     background-color: rgba(255, 255, 255, 0.1);
 }
-

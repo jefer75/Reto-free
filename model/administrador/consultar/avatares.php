@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/mapas.css">
+    <link rel="stylesheet" href="../../../css/avatares.css">
     <title>Avatares</title>
 </head>
 <body>
@@ -26,7 +26,7 @@
             <input type="submit" value="Regresar" name="regresar" id="regresar"> 
         </td>
         <td>
-            <input type="submit" value="Registrar" name="registrar">
+            <input type="submit" value="Registrar" name="registrar" class="registrar">
         </td>
         
         </tr>

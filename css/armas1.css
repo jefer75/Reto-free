@@ -2,14 +2,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: url('../img/index_usu.jpg') no-repeat center center fixed;
+    background: url('../img/index_admin.jpg') no-repeat center center fixed;
     background-size: cover; 
     color: rgb(246, 241, 241); 
 }
 
 .container {
     width: 80%;
-    margin: 150px auto; 
+    margin: 155px auto; 
     background-color: rgba(19, 18, 18, 0.945); 
     padding: 20px;
     border-radius: 10px;
@@ -31,8 +31,8 @@ th, td {
 }
 
 th {
-    background-color: #dc0fa2; 
-    color: #ffffff; 
+    background-color: #feb202; 
+    color: #101010; 
     text-transform: uppercase; 
 }
 
@@ -46,21 +46,36 @@ th:last-child, td:last-child {
 
 #regresar {
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 20px;
     padding: 10px 20px; 
     z-index: 3; 
-    background: #dc0fa2;
+    background: rgb(245, 190, 11);
     font-size: 18px; 
     border-radius: 30px; 
     font-weight: 600;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Agrega transform a la transición */
 }
 
 #regresar:hover {
-    background-color: #ffffff; /* Cambia el color de fondo al pasar el cursor */
-    color: rgb(0, 0, 0); /* Cambia el color del texto al pasar el cursor */
-    transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
+    background-color: rgba(245, 190, 11); 
+    color: white; 
+}
+
+.registrar {
+    position: absolute;
+    top: 40px;
+    left: 180px;
+    padding: 10px 20px; 
+    z-index: 3; 
+    background: rgb(245, 190, 11);
+    font-size: 18px; 
+    border-radius: 30px; 
+    font-weight: 600;
+}
+
+.registrar:hover {
+    background-color: rgba(245, 190, 11); 
+    color: white; 
 }
 
 .estado_ {

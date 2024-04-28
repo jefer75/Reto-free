@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2024 a las 05:21:39
+-- Tiempo de generación: 28-04-2024 a las 14:56:28
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.1.26
 
@@ -129,7 +129,7 @@ CREATE TABLE `mundos` (
 
 INSERT INTO `mundos` (`id_mundo`, `nomb_mundo`, `imagen`, `id_estado`) VALUES
 (1, 'Bermuda', '../../../img/mapas/bermuda.jpg', 5),
-(2, 'Purgatorio', '../../../img/mapas/purgatorio.jpg', 6),
+(2, 'Purgatorio', '../../../img/mapas/purgatorio.jpg', 5),
 (3, 'Nexterra', '../../../img/mapas/nexterra.png', 6),
 (4, 'Alpes', '../../../img/mapas/alpes.jpg', 6),
 (5, 'Kalahari', '../../../img/mapas/kalahari.jpg', 6);
@@ -146,6 +146,7 @@ CREATE TABLE `partidas` (
   `username` varchar(20) NOT NULL,
   `puntos` int(11) NOT NULL,
   `kills` int(11) NOT NULL,
+  `id_mundo` int(11) NOT NULL,
   `duracion` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -153,9 +154,17 @@ CREATE TABLE `partidas` (
 -- Volcado de datos para la tabla `partidas`
 --
 
-INSERT INTO `partidas` (`id_partida`, `id_sala`, `username`, `puntos`, `kills`, `duracion`) VALUES
-(25, 34, 'cielito', 0, 0, '00:00:00'),
-(26, 34, 'cielito', 0, 1, '00:00:00');
+INSERT INTO `partidas` (`id_partida`, `id_sala`, `username`, `puntos`, `kills`, `id_mundo`, `duracion`) VALUES
+(12, 44, 'pablito', 2, 9, 1, '00:00:00'),
+(13, 44, 'cielito', 2, 0, 1, '00:00:00'),
+(14, 45, 'pablito', 0, 0, 2, '00:00:00'),
+(15, 48, 'cielito', 4, 0, 2, '00:00:00'),
+(16, 48, 'pablito', 0, 0, 1, '00:00:00'),
+(17, 49, 'cielito', 7, 1, 2, '00:00:00'),
+(18, 49, 'pablito', 7, 1, 2, '00:00:00'),
+(19, 50, 'pablito', 25, 4, 2, '00:00:00'),
+(20, 50, 'cielito', 0, 0, 1, '00:00:00'),
+(21, 51, 'cielito', 4, 0, 2, '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -207,16 +216,9 @@ CREATE TABLE `salas` (
   `id_sala` int(11) NOT NULL,
   `nivel` int(11) NOT NULL,
   `num_jug` int(11) NOT NULL,
-  `id_mundo` int(11) NOT NULL
+  `id_mundo` int(11) NOT NULL,
+  `id_estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `salas`
---
-
-INSERT INTO `salas` (`id_sala`, `nivel`, `num_jug`, `id_mundo`) VALUES
-(33, 1, 4, 2),
-(34, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -287,7 +289,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`username`, `edad`, `id_avatar`, `id_rango`, `puntos`, `nivel`, `correo`, `contrasena`, `f_ingreso`, `token`, `id_estado`, `id_tipo_user`) VALUES
-('cielito', 48, '1', 1, 0, 1, 'cielito@gmail.com', '$2y$10$B.ZVSi9c5JO3eiHyVtlCxOEL03VYqn0ylRWGcz0grbbdfBTWRIxA2', '2024-04-08', '', 1, 2),
+('cielito', 48, '1', 1, 4, 2, 'cielito@gmail.com', '$2y$10$B.ZVSi9c5JO3eiHyVtlCxOEL03VYqn0ylRWGcz0grbbdfBTWRIxA2', '2024-04-08', '', 1, 2),
 ('jeferson', 18, '2', 1, 0, 1, 'jefryoffroad@gmail.com', '$2y$10$hfjhvnD/IvKvUEDF96EK3u1jymllzXa90/7n3kcNOYE.wYtJOxUnq', '2024-04-22', '', 1, 1),
 ('pablito', 45, '2', 1, 0, 1, 'yiycardenal@gmail.com', '$2y$10$4OXLqXDpfWdXxCf6ElFbC.fF/iAUEVaRXmUCzPFW/RBLgqqOloeqm', '2024-04-08', '', 1, 2);
 
@@ -375,13 +377,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `armas`
 --
 ALTER TABLE `armas`
-  MODIFY `id_arma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_arma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `avatares`
 --
 ALTER TABLE `avatares`
-  MODIFY `id_avatar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_avatar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `estados`
@@ -393,7 +395,7 @@ ALTER TABLE `estados`
 -- AUTO_INCREMENT de la tabla `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `id_jug` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id_jug` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `mundos`
@@ -405,13 +407,13 @@ ALTER TABLE `mundos`
 -- AUTO_INCREMENT de la tabla `partidas`
 --
 ALTER TABLE `partidas`
-  MODIFY `id_partida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_partida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `rangos`
 --
 ALTER TABLE `rangos`
-  MODIFY `id_rango` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_rango` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `reportes`
@@ -423,7 +425,7 @@ ALTER TABLE `reportes`
 -- AUTO_INCREMENT de la tabla `salas`
 --
 ALTER TABLE `salas`
-  MODIFY `id_sala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_sala` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_armas`

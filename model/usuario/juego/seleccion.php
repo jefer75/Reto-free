@@ -98,6 +98,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/seleccion.css">
     <title>Elige el mapa</title>
 </head>
 <body>
@@ -121,9 +122,11 @@ if (isset($_POST['regresar'])) {
 ?>
     </header>
 
-<div class="container">
+<div class="box">
 
 <form method="post" name="formreg" id="formreg" class="signup-form"  autocomplete="off">
+
+        <h2>Selecciona el mapa</h2>
 
         <label for="id_mundo"></label>
         <select name="id_mundo">

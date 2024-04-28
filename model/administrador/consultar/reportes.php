@@ -51,7 +51,7 @@ if (isset($_POST['regresar'])) {
                 </tr>
                 <?php
     
-                $sql= $con -> prepare ("SELECT * FROM partidas WHERE username= '$username'");
+                $sql= $con -> prepare ("SELECT * FROM partidas");
                 $sql -> execute();
                 $fila = $sql -> fetchAll(PDO::FETCH_ASSOC);
 

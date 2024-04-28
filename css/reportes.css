@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('../img/index_usu.jpg') no-repeat center center fixed;
+    background-size: cover; 
+    color: rgb(246, 241, 241); 
+}
+
+.container {
+    width: 80%;
+    margin: 250px auto; 
+    background-color: rgba(19, 18, 18, 0.945); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.782); 
+    text-align: center; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px; 
+    text-align: left;
+    border-bottom: 1px solid #efeeee2d;
+    transition: background-color 0.3s; 
+}
+
+th {
+    background-color: #dc0fa2; 
+    color: #ffffff; 
+    text-transform: uppercase; 
+}
+
+th:first-child, td:first-child {
+    font-weight: bold;
+}
+
+th:last-child, td:last-child {
+    text-align: center;
+}
+
+#regresar {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    padding: 10px 20px; 
+    z-index: 3; 
+    background: #dc0fa2;
+    font-size: 18px; 
+    border-radius: 30px; 
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Agrega transform a la transición */
+}
+
+#regresar:hover {
+    background-color: #ffffff; /* Cambia el color de fondo al pasar el cursor */
+    color: rgb(0, 0, 0); /* Cambia el color del texto al pasar el cursor */
+    transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
+}
+
+
+.estado_ {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+   
+.estado_red {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+td:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+}

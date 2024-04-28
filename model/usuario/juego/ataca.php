@@ -14,6 +14,7 @@
     foreach ($atacado as $fila){
         $kills = $fila['kills'];
     }    
+    
 
     ?>
 
@@ -35,8 +36,17 @@
     $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
     foreach ($resultados as $fila) {
         $nivel = $fila['nivel'];
+        $puntos = $fila['puntos'];
+        $rango = $fila['id_rango'];
     }
 
+    $query = $con->prepare("SELECT * FROM jugadores Where username='$username'");
+    $query->execute();
+    $resultados = $query->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($resultados as $fila) {
+        $puntos= $fila['dano_real'];
+    }
+    
     
     
     if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
@@ -45,12 +55,11 @@
     if ($id_arma=="")
       {
           echo '<script>alert ("Selecciona tu arma");</script>';
-          echo '<script>window.location="ataca.php"</script>';
         }
         
         else {
             
-            $con_daño = $con -> prepare("SELECT * FROM armas WHERE id_arma = $id_arma");
+            $con_daño = $con -> prepare("SELECT * FROM  armas WHERE id_arma = $id_arma");
             $con_daño -> execute ();
             $daños = $con_daño -> fetchAll(PDO::FETCH_ASSOC);
             
@@ -58,21 +67,34 @@
                 $daño = $fila ['dano']; 
             }
 
-            $actualizado= $vida - $daño;
-            
 
+            $actualizado= $vida - $daño;
+           
+            
             if($actualizado <= 0){
     
                 $actualizado = 0;
                 $estado = 4;
                 $kills=$kills+1;
+                $puntos=$puntos+5;
             }            
     
             $actualizar= $con -> prepare ("UPDATE jugadores SET vida='$actualizado', id_estado='$estado' WHERE username = '$user_atacado'");
             $actualizar -> execute();
 
-            $subir_puntos= $con -> prepare ("UPDATE jugadores SET dano_real=+$daño, kills='$kills' WHERE username = '$username'");
+            $subir_puntos= $con -> prepare ("UPDATE jugadores SET dano_real=$puntos, kills='$kills' WHERE username = '$username'");
             $subir_puntos -> execute();
+
+
+            if($puntos >= 250){
+                $puntos_user= $con -> prepare ("UPDATE usuarios SET id_rango=$rango+1 WHERE username = '$username'");
+                $puntos_user -> execute();
+                }
+
+            if($puntos >= 500){
+            $puntos_user= $con -> prepare ("UPDATE usuarios SET puntos= 0, nivel=$nivel+1 WHERE username = '$username'");
+            $puntos_user -> execute();
+            }
             
             echo '<script> alert ("Ataque realizado con exito");</script>';
             echo '<script> window.close(); </script>';
@@ -150,8 +172,8 @@
 </html>
 <?php
 }
-else {
-    echo '<script> alert ("El usuario al que intentas atacar ya esta eliminado");</script>';
-    echo '<script> window.close(); </script>';   
-}
+else if ($estado=4){
+     echo '<script> alert ("El usuario al que intentas atacar ya esta eliminado");</script>';
+     echo '<script> window.close(); </script>';   
+ }
 ?>

@@ -37,7 +37,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
     } else { 
                 
             //consulta si hay una sala que tenga  menos de 5 jugadores, con el mundo indicado
-            $fila = $con->prepare("SELECT * FROM salas WHERE id_mundo = $id_mundo AND nivel = $nivel AND num_jug <=5");
+            $fila = $con->prepare("SELECT * FROM salas WHERE id_mundo = $id_mundo AND nivel = $nivel AND num_jug <=5 AND id_estado=5");
             $fila->execute();
             $numero_jugadores = $fila->fetchAll(PDO::FETCH_ASSOC);
                 
@@ -64,7 +64,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formreg")) {
         else {
     
             //crea una sala con el mundo seleccionado por el usuario
-            $fila = $con->prepare("INSERT INTO salas (nivel, num_jug, id_mundo) VALUES ( $nivel, 1, $id_mundo)");
+            $fila = $con->prepare("INSERT INTO salas (nivel, num_jug, id_mundo, id_estado) VALUES ( $nivel, 1, $id_mundo, 5)");
             $fila->execute();
         }
             //consulta el identificador de la sala que acabamos de crear

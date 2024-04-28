@@ -30,7 +30,6 @@
                 $id_sala = $fila['id_sala'];
                 $vida = $fila['vida'];
             }
-            
         //consulta el mundo de esa sala
         $con_estado = $con -> prepare("SELECT salas.id_sala, salas.id_mundo, salas.num_jug, mundos.id_mundo, mundos.nomb_mundo FROM salas inner JOIN mundos ON salas.id_mundo = mundos.id_mundo WHERE salas.id_sala='$id_sala'");
         $con_estado -> execute ();
@@ -42,8 +41,6 @@
             $nomb_mundo= $fila ['nomb_mundo'];
             $num_jug= $fila ['num_jug'];
         }
-
-
         
         //condicional para la resta de puntos del jugador
         if ($puntos >= 20){
@@ -63,7 +60,7 @@
 
             if ($num_jug>0){
                 //actualiza el numero de jugadores en la sala seleccionada de la tabla salas
-                $actualizar_num_jug = $con->prepare("UPDATE salas SET num_jug=$num_jug WHERE id_sala = $id_sala");
+                $actualizar_num_jug = $con->prepare("UPDATE salas SET num_jug=$num_jug, id_estado=6 WHERE id_sala = $id_sala");
                 $actualizar_num_jug->execute();
                 
             }else {
@@ -75,7 +72,7 @@
             
             
             //redirecciona al index del usuario
-            header('location:index.php');
+            header('location:../inicio/index.php');
             
             $abandonar= $con -> prepare ("DELETE FROM jugadores WHERE username = '$username'");
             $abandonar -> execute();
@@ -139,7 +136,7 @@
                 </tr>
                 
                 <?php
-                    $con_jugadores = $con->prepare("SELECT jugadores.id_sala, jugadores.username, jugadores.vida, jugadores.kills, jugadores.id_estado, estados.estado FROM jugadores inner JOIN estados ON jugadores.id_estado = estados.id_estado WHERE jugadores.username !='$username' AND jugadores.id_estado=3");
+                    $con_jugadores = $con->prepare("SELECT jugadores.id_sala, jugadores.username, jugadores.vida, jugadores.kills, jugadores.id_estado, estados.estado FROM jugadores inner JOIN estados ON jugadores.id_estado = estados.id_estado WHERE jugadores.username !='$username' AND jugadores.id_estado=3 AND id_sala = $id_sala");
                     $con_jugadores->execute();
                     $jugadores = $con_jugadores->fetchAll(PDO::FETCH_ASSOC);
 
@@ -168,8 +165,18 @@
 
                 $abandonar= $con -> prepare ("DELETE FROM jugadores WHERE vida = 0");
                 $abandonar -> execute();
-                ?>
 
+                $fila = $con->prepare("SELECT * FROM salas WHERE num_jug = 1 AND id_sala = $id_sala AND id_estado = 6");
+                $fila->execute();
+                $ganador = $fila->fetchAll(PDO::FETCH_ASSOC);
+                
+                //si encuentra una sala, ejecute....
+                if ($ganador){
+                    echo"<script>alert('Has siso el ganador')</script>";
+                    include 'header.php'; 
+                    header('location:victoria.php');
+                }
+                ?>
                 <form action="" method="POST">
                     
                     <input type="submit" name="abandonar" value="Abandonar Partida">

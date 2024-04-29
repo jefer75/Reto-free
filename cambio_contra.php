@@ -50,13 +50,13 @@ if (isset($_POST['actualizar'])){
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/olv_contra.css">
   <title>Recuperar Contraseña</title>
-  <link rel="stylesheet" href="../../../css/recuperar_con.css">
 
 </head>
 <body>
   <div class="formulario">
-  <div class="container">
+  <div class="box">
     <div class="col-lg-6 login-form">
       <img class="image-logo" src="https://cdn-icons-png.flaticon.com/512/6375/6375816.png" />
       <br>

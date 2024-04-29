@@ -26,7 +26,7 @@
             <input type="submit" value="Regresar" name="regresar" id="regresar"> 
         </td>
         <td>
-            <input type="submit" value="Registrar" name="registrar">
+            <input type="submit" value="Registrar" name="registrar" class="registrar">
         </td>
         
         </tr>

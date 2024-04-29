@@ -32,12 +32,13 @@ header input[type="submit"] {
 
 .box {
     position: relative;
-    width: 380px;
+    width: 30%;
     height: 420px;
     background: black;
     border-radius: 8px;
     overflow: hidden;
     margin-top: 100px;
+    padding: 5%;
 }
 
 .box::before{

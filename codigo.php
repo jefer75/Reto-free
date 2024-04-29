@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../../../db/connection.php");
+    require_once("db/connection.php");
     // include("../../../controller/validarSesion.php");
     $db = new Database();
     $con = $db -> conectar();
@@ -16,7 +16,7 @@ if (isset($_POST['verificar']))
 
       if ($fila) {
       echo '<script> alert ("Su codigo ha sido verificado correctamente");</script>';
-      echo '<script>window.location="recuperacion2.php"</script>';
+      echo '<script>window.location="cambio_contra.php"</script>';
       }
       else{
         echo '<script> alert ("El codigo digitado no coincide con el codigo enviado");</script>';
@@ -30,17 +30,17 @@ if (isset($_POST['verificar']))
 <head>
   <meta charset="UTF-8">
   <title>Restablecer Contraseña</title>
-  <link rel="stylesheet" href="../../../css/recuperar_con.css">
+  <link rel="stylesheet" href="css/olv_contra.css">
 
 </head>
 <body>
-  <div class="container">
+  <div class="box">
     <div class="col-lg-6 login-form">
       <img class="image-logo" src="https://cdn-icons-png.flaticon.com/512/6375/6375816.png" />
       <br>
       <br>
       <br>
-      <h1>Restablecer Password</h1>
+      <h1>Codigo de envio</h1>
     
       <div class="input-form password-toggle">
         <br>
